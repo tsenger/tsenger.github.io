@@ -4,7 +4,7 @@
   <head>
       <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  <meta name="description" content="Sealva - VDS Validator Mobile App">
+  <meta name="description" content="Sealva - Technical Documentation for Certificate Set Import">
   <link rel="apple-touch-icon" sizes="180x180" href="img/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
@@ -12,7 +12,7 @@
   <meta name="author" content="Holger Koenemann">
   <meta name="generator" content="Eleventy v2.0.1">
   <meta name="HandheldFriendly" content="true">
-  <title>Sealva - VDS Validator</title>
+  <title>Sealva - Technical Documentation</title>
   <link rel="stylesheet" href="css/min/theme.css">
      <link rel="stylesheet" href="css/aos.css">
 
@@ -51,8 +51,8 @@
   font-weight: 300;
   font-display: swap;
   src: local(''),
-       url('./fonts/inter-v12-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/inter-v12-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('./fonts/inter-v12-latin-300.woff2') format('woff2'),
+       url('./fonts/inter-v12-latin-300.woff') format('woff');
 }
 
 @font-face {
@@ -61,8 +61,8 @@
   font-weight: 500;
   font-display: swap;
   src: local(''),
-       url('./fonts/inter-v12-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/inter-v12-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('./fonts/inter-v12-latin-500.woff2') format('woff2'),
+       url('./fonts/inter-v12-latin-500.woff') format('woff');
 }
 @font-face {
   font-family: 'Inter';
@@ -70,8 +70,8 @@
   font-weight: 700;
   font-display: swap;
   src: local(''),
-       url('./fonts/inter-v12-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/inter-v12-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('./fonts/inter-v12-latin-700.woff2') format('woff2'),
+       url('./fonts/inter-v12-latin-700.woff') format('woff');
 }
 
 </style>
@@ -112,63 +112,189 @@
             <main class="mb-auto col-12 px-vw-5">
               <div class="row d-flex justify-content-center">
   <div class="col-12 col-xl-10 col-xxl-8 mt-3 px-4 px-sm-0">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <img loading="lazy" src="img/webp2/sealva_logo.webp" width="120" height="120" class="rounded-circle shadow-sm mb-4" alt="Logo of Sealva App">
-    </div>
 
-    <h1 data-aos="fade-left" data-aos-delay="100">Sealva - VDS Validator</h1>
-
-    <div class="lead pb-4 border-bottom mb-5" data-aos="fade-left" data-aos-delay="200">
-      <p>Sealva is a mobile app for scanning, parsing and verifying Visible Digital Seals (VDS).</p>
-    </div>
-
-    <div data-aos="fade-left" data-aos-delay="300">
-      <h2 class="h4 mb-3">What is Sealva?</h2>
-      <p>Sealva enables you to scan VDS codes and verify their contents. The app supports validation of digital seals according to the ICAO 9303 and BSI TR-03137 specifications and provides a user-friendly interface for displaying scanned data.</p>
-
-      <h2 class="h4 mb-3 mt-4">Features</h2>
-      <ul class="ps-4">
-        <li class="mb-2">
-          <strong>Scan VDS codes</strong>
-          using your device camera
-        </li>
-        <li class="mb-2">
-          <strong>Parse and decode</strong>
-          VDS data
-        </li>
-        <li class="mb-2">
-          <strong>Cryptographic verification</strong>
-          of digital signatures
-        </li>
-        <li class="mb-2">
-          <strong>Clear presentation</strong>
-          of contained information
-        </li>
-        <li class="mb-2">
-          <strong>Support for various VDS types</strong>
-          according to ICAO 9303 and BSI TR-03137
-        </li>
-      </ul>
-
-      <h2 class="h4 mb-3 mt-4">Download</h2>
-      <p>The app is available for free:</p>
-      <a class="btn btn-black btn-xl shadow me-1 mb-3" href="https://play.google.com/store/apps/details?id=de.tsenger.sealver" target="_blank">
-        Download for Android
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right ms-2" viewbox="0 0 16 16">
-          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.4 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-        </svg>
-      </a>
-
-      <p class="mt-5">
-        <a href="sealva_technical.html" class="link-dark link-underline">
-          Technical Documentation
-          (for developers)
+    <div class="mb-4" data-aos="fade-left" data-aos-delay="100">
+      <p class="small">
+        <a href="sealva.html" class="link-dark link-underline">
+          &larr; Back to Sealva
         </a>
       </p>
+    </div>
 
-      <p class="mt-4 mb-5">
-        <a href="sealva_privacy.html" class="link-dark link-underline">
-          Privacy Policy
+    <h1 data-aos="fade-left" data-aos-delay="200">
+      Technical Documentation
+    </h1>
+
+    <p class="lead pb-4 border-bottom mb-5" data-aos="fade-left"
+       data-aos-delay="300">
+      JSON format for importing external Certificate Sets
+      into Sealva Mobile App
+    </p>
+
+    <div data-aos="fade-left" data-aos-delay="400">
+      <h2 class="h4 mb-3">Overview</h2>
+      <p>
+        To import external Certificate Sets into the Sealva Mobile App,
+        a QR code containing specific JSON data is required. This QR code
+        provides the app with the necessary information to download and
+        import certificate keystores.
+      </p>
+
+      <h2 class="h4 mb-3 mt-5">QR Code JSON Format</h2>
+      <p>
+        The QR code must contain a JSON object with the following
+        structure:
+      </p>
+
+      <h3 class="h5 mb-2 mt-4">Fields</h3>
+      <dl class="row">
+        <dt class="col-sm-3 fw-bold">
+          <code>certUrl</code>
+        </dt>
+        <dd class="col-sm-9">
+          The complete URL to the keystore collection endpoint<br>
+          <small class="text-muted">
+            Format:
+            <code>{backendUrl}/certificates/exports/{secretId}</code>
+          </small>
+        </dd>
+
+        <dt class="col-sm-3 fw-bold">
+          <code>certSetName</code>
+        </dt>
+        <dd class="col-sm-9">
+          The name of the Certificate Set (string)
+        </dd>
+
+        <dt class="col-sm-3 fw-bold">
+          <code>certSetId</code>
+        </dt>
+        <dd class="col-sm-9">
+          The unique ID of the Certificate Set (UUID)
+        </dd>
+      </dl>
+
+      <h3 class="h5 mb-2 mt-4">Example</h3>
+      <pre class="bg-light p-4 rounded"
+           style="overflow-x: auto;"><code>{
+  "certUrl": "https://backend.server.example/certSet",
+  "certSetName": "My Certificate Set",
+  "certSetId": "550e8400-e29b-41d4-a716-446655440000"
+}</code></pre>
+
+      <h2 class="h4 mb-3 mt-5">Certificate Collection Response</h2>
+      <p>
+        When the Sealva app calls the <code>certUrl</code>,
+        the server must respond with a JSON object containing
+        references to the actual certificate keystores.
+      </p>
+
+      <h3 class="h5 mb-2 mt-4">Response Structure</h3>
+      <dl class="row">
+        <dt class="col-sm-3 fw-bold">
+          <code>ca</code>
+        </dt>
+        <dd class="col-sm-9">
+          Certificate Authority keystore object
+        </dd>
+
+        <dt class="col-sm-3 fw-bold">
+          <code>ds</code>
+        </dt>
+        <dd class="col-sm-9">
+          Document Signer keystore object
+        </dd>
+
+        <dt class="col-sm-3 fw-bold">
+          <code>sksInfoVersion</code>
+        </dt>
+        <dd class="col-sm-9">
+          Version of the SKS Info structure (always 2)
+        </dd>
+
+        <dt class="col-sm-3 fw-bold">
+          <code>lastPublished</code>
+        </dt>
+        <dd class="col-sm-9">
+          Timestamp of last publication
+          (Unix timestamp in milliseconds)
+        </dd>
+      </dl>
+
+      <h3 class="h5 mb-2 mt-4">Keystore Object Structure</h3>
+      <p>
+        Both <code>ca</code> and <code>ds</code> objects have the
+        following fields:
+      </p>
+      <dl class="row">
+        <dt class="col-sm-3 fw-bold">
+          <code>format</code>
+        </dt>
+        <dd class="col-sm-9">
+          For Sealva, only "zip" is supported
+        </dd>
+
+        <dt class="col-sm-3 fw-bold">
+          <code>url</code>
+        </dt>
+        <dd class="col-sm-9">
+          Download URL for the ZIP file containing the certificates
+          (string)
+        </dd>
+
+        <dt class="col-sm-3 fw-bold">
+          <code>lastupdate</code>
+        </dt>
+        <dd class="col-sm-9">
+          Timestamp of last update
+          (Unix timestamp in milliseconds)
+        </dd>
+      </dl>
+
+      <h3 class="h5 mb-2 mt-4">Example Response</h3>
+      <pre class="bg-light p-4 rounded"
+           style="overflow-x: auto;"><code>{
+  "ca": {
+    "format": "zip",
+    "url": "https://backend.server.example/ca.zip",
+    "lastupdate": 1704297600000
+  },
+  "ds": {
+    "format": "zip",
+    "url": "https://backend.server.example/ds.zip",
+    "lastupdate": 1704297600000
+  },
+  "sksInfoVersion": 2,
+  "lastPublished": 1704297600000
+}</code></pre>
+
+      <h2 class="h4 mb-3 mt-5">Import Process</h2>
+      <ol>
+        <li class="mb-2">
+          User scans the QR code in Sealva Mobile App
+        </li>
+        <li class="mb-2">
+          App parses the JSON to extract <code>certUrl</code>,
+          <code>certSetName</code>, and <code>certSetId</code>
+        </li>
+        <li class="mb-2">
+          App calls the <code>certUrl</code> endpoint
+        </li>
+        <li class="mb-2">
+          Server responds with the certificate collection JSON
+        </li>
+        <li class="mb-2">
+          App downloads the ZIP files from <code>ca.url</code>
+          and <code>ds.url</code>
+        </li>
+        <li class="mb-2">
+          Certificates are imported and ready for VDS validation
+        </li>
+      </ol>
+
+      <p class="mt-5 mb-5">
+        <a href="sealva.html" class="link-dark link-underline">
+          &larr; Back to Sealva
         </a>
       </p>
     </div>

@@ -124,25 +124,32 @@
 
     <div data-aos="fade-left" data-aos-delay="300">
       <h2 class="h4 mb-3">What is Sealva?</h2>
-      <p>Sealva enables you to scan VDS codes and verify their contents. The app supports validation of digital seals according to the ICAO 9303 and BSI TR-03137 specifications and provides a user-friendly interface for displaying scanned data.</p>
-
+      <p>Sealva enables you to scan VDS codes on offical documents and verify their contents. The app supports verification of visual digital seals according to the ICAO 9303 and BSI TR-03137 specifications and provides a user-friendly interface for displaying the data.</p>
+      <p>It uses the open source Kotlin multiplatform library <a class="link-dark link-underline" href="https://github.com/tsenger/vdstools" target="_blank">VdsTools</a> for parsing and decoding the barcode content. </p>
+      <p>Currently, all profiles defined in <a class="link-dark link-underline" href="https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/TR-nach-Thema-sortiert/tr03137/tr-03137.html" target="_blank">BSI TR-03137-1</a>, 
+        <a class="link-dark link-underline" href="https://www2023.icao.int/publications/Documents/9303_p13_cons_en.pdf" target="_blank">ICAO 9303-13</a>, 
+        and the new draft <a class="link-dark link-underline" href="https://www2023.icao.int/Security/FAL/TRIP/PublishingImages/Pages/Publications/ICAO%20TR%20-%20ICAO%20Datastructure%20for%20Barcode.pdf" target="_blank">“ICAO Datastructure for Barcode”</a> are read and decoded. Administrative documents according to BSI TR-03171 are currently not supported due to profile definitions and certificates that are not freely accessible.</p>
       <h2 class="h4 mb-3 mt-4">Features</h2>
       <ul class="ps-4">
         <li class="mb-2">
-          <strong>Scan VDS codes</strong>
-          using your device camera
+          <strong>Scan visible digital seals</strong>
+          using the mobiles camera
         </li>
         <li class="mb-2">
           <strong>Parse and decode</strong>
-          VDS data
+          the data contained in the Seal
+        </li>
+        <li class="mb-2">
+          <strong>Clear presentation</strong>
+          of contained information
         </li>
         <li class="mb-2">
           <strong>Cryptographic verification</strong>
           of digital signatures
         </li>
         <li class="mb-2">
-          <strong>Clear presentation</strong>
-          of contained information
+          <strong>Using Certificate sets</strong>
+          either provided central or using your own certificates
         </li>
         <li class="mb-2">
           <strong>Support for various VDS types</strong>

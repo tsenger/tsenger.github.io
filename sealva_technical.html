@@ -155,7 +155,7 @@
           The complete URL to the keystore collection endpoint<br>
           <small class="text-muted">
             Format:
-            <code>{backendUrl}/certificates/exports/{secretId}</code>
+            <code>https://backend.server.example/certSet</code>
           </small>
         </dd>
 
@@ -170,7 +170,7 @@
           <code>certSetId</code>
         </dt>
         <dd class="col-sm-9">
-          The unique ID of the Certificate Set (UUID)
+          The unique ID of the Certificate Set (UUID) for internal reference purpose
         </dd>
       </dl>
 
@@ -256,12 +256,12 @@
            style="overflow-x: auto;"><code>{
   "ca": {
     "format": "zip",
-    "url": "https://backend.server.example/ca.zip",
+    "url": "https://backend.server.example/certSet/certSetId/ca.zip",
     "lastupdate": 1704297600000
   },
   "ds": {
     "format": "zip",
-    "url": "https://backend.server.example/ds.zip",
+    "url": "https://backend.server.example/certSet/certSetId/ds.zip",
     "lastupdate": 1704297600000
   },
   "sksInfoVersion": 2,

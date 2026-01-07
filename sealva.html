@@ -126,9 +126,10 @@
       <h2 class="h4 mb-3">What is Sealva?</h2>
       <p>Sealva enables you to scan VDS codes on offical documents and verify their contents. The app supports verification of visual digital seals according to the ICAO 9303 and BSI TR-03137 specifications and provides a user-friendly interface for displaying the data.</p>
       <p>It uses the open source Kotlin multiplatform library <a class="link-dark link-underline" href="https://github.com/tsenger/vdstools" target="_blank">VdsTools</a> for parsing and decoding the barcode content. </p>
-      <p>Currently, all profiles defined in <a class="link-dark link-underline" href="https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/TR-nach-Thema-sortiert/tr03137/tr-03137.html" target="_blank">BSI TR-03137-1</a>, 
+      <p>Currently, all profiles defined in <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03137" target="_blank">BSI TR-03137-1</a>, 
         <a class="link-dark link-underline" href="https://www2023.icao.int/publications/Documents/9303_p13_cons_en.pdf" target="_blank">ICAO 9303-13</a>, 
-        and the new draft <a class="link-dark link-underline" href="https://www2023.icao.int/Security/FAL/TRIP/PublishingImages/Pages/Publications/ICAO%20TR%20-%20ICAO%20Datastructure%20for%20Barcode.pdf" target="_blank">“ICAO Datastructure for Barcode”</a> are read and decoded. Administrative documents according to BSI TR-03171 are currently not supported due to profile definitions and certificates that are not freely accessible.</p>
+        and the new draft <a class="link-dark link-underline" href="https://www2023.icao.int/Security/FAL/TRIP/PublishingImages/Pages/Publications/ICAO%20TR%20-%20ICAO%20Datastructure%20for%20Barcode.pdf" target="_blank">“ICAO Datastructure for Barcode”</a> are read and decoded. 
+        Administrative documents according to <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03171">BSI TR-03171</a> are currently not supported due to profile definitions and certificates that are not freely accessible.</p>
       <h2 class="h4 mb-3 mt-4">Features</h2>
       <ul class="ps-4">
         <li class="mb-2">
@@ -159,12 +160,20 @@
 
       <h2 class="h4 mb-3 mt-4">Download</h2>
       <p>The app is available for free:</p>
-      <a class="btn btn-black btn-xl me-1 mb-3" href="https://play.google.com/store/apps/details?id=de.tsenger.sealver" target="_blank">
-        Download for Android
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right ms-2" viewbox="0 0 16 16">
-          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.4 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-        </svg>
-      </a>
+      <div class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-start" style="gap: 1rem;">
+        <a class="btn btn-black btn-xl d-flex align-items-center mb-3 mb-sm-0" href="https://play.google.com/store/apps/details?id=de.tsenger.sealver" target="_blank" style="white-space: nowrap; flex: 0 0 auto;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-4" viewBox="0 0 512 512">
+            <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
+          </svg>
+          Download for Android
+        </a>
+        <a class="btn btn-black btn-xl d-flex align-items-center" href="https://apps.apple.com/de/app/sealva-vds-validator/id6756822727" target="_blank" style="white-space: nowrap; flex: 0 0 auto;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-4" viewBox="0 0 448 512">
+            <path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM127 384.5c-5.5 9.6-17.8 12.8-27.3 7.3-9.6-5.5-12.8-17.8-7.3-27.3l14.3-24.7c16.1-4.9 29.3-1.1 39.6 11.4L127 384.5zm138.9-53.9H84c-11 0-20-9-20-20s9-20 20-20h51l65.4-113.2-20.5-35.4c-5.5-9.6-2.2-21.8 7.3-27.3 9.6-5.5 21.8-2.2 27.3 7.3l8.9 15.4 8.9-15.4c5.5-9.6 17.8-12.8 27.3-7.3 9.6 5.5 12.8 17.8 7.3 27.3l-85.8 148.6h62.1c20.2 0 31.5 23.7 22.7 40zm98.1 0h-29l19.6 33.9c5.5 9.6 2.2 21.8-7.3 27.3-9.6 5.5-21.8 2.2-27.3-7.3-32.9-56.9-57.5-99.7-74-128.1-16.7-29-4.8-58 7.1-67.8 13.1 22.7 32.7 56.7 58.9 102h52c11 0 20 9 20 20 0 11.1-9 20-20 20z"/>
+          </svg>
+          Download for iOS
+        </a>
+      </div>
 
       <p class="mt-5">
         <a href="sealva_technical.html" class="link-dark link-underline">

@@ -112,116 +112,111 @@
             <main class="mb-auto col-12 px-vw-5">
               <div class="row d-flex justify-content-center">
   <div class="col-12 col-xl-10 col-xxl-8 mt-3 px-4 px-sm-0" data-aos="fade-left" data-aos-delay="100">
+    <p class="small"><a href="sealva_datenschutz.html" class="link-dark" hreflang="de" lang="de">Deutsche Fassung</a></p>
     <h1>Privacy Policy - Sealva</h1>
-    <p class="lead pb-4 border-bottom mb-5">With the following privacy policy, we would like to inform you about what types of your personal data (hereinafter also referred to as "data") we process for what purposes and to what extent in the context of providing our application.</p>
+    <p class="lead pb-4 border-bottom mb-5">Sealva verifies Visible Digital Seals (VDS) directly on your device. The app works without an account, advertising or tracking. This policy explains which data is nevertheless processed, why, and what rights you have.</p>
 
-    <p class="text-muted small">Last updated: January 17, 2026</p>
+    <p class="text-muted small">Last updated: October 13, 2026</p>
 
     <h2 class="h4 mt-4 mb-3">Table of Contents</h2>
-    <ul>
+    <ol>
       <li><a href="#controller" class="link-dark">Controller</a></li>
-      <li><a href="#overview" class="link-dark">Overview of Processing</a></li>
-      <li><a href="#legal-basis" class="link-dark">Relevant Legal Basis</a></li>
-      <li><a href="#security" class="link-dark">Security Measures</a></li>
-      <li><a href="#contact-management" class="link-dark">Contact and Inquiry Management</a></li>
-    </ul>
+      <li><a href="#summary" class="link-dark">Summary</a></li>
+      <li><a href="#on-device" class="link-dark">Using the App on Your Device</a></li>
+      <li><a href="#server" class="link-dark">Connections to My Server</a></li>
+      <li><a href="#links" class="link-dark">Links and Other Apps</a></li>
+      <li><a href="#stores" class="link-dark">App Stores</a></li>
+      <li><a href="#contact" class="link-dark">Contacting Me by Email</a></li>
+      <li><a href="#rights" class="link-dark">Your Rights</a></li>
+      <li><a href="#other" class="link-dark">Other Information</a></li>
+    </ol>
 
-    <h2 id="controller" class="h4 mt-5 mb-3">Contact person</h2>
+    <h2 id="controller" class="h4 mt-5 mb-3">1. Controller</h2>
     <p><strong>Tobias Senger</strong><br>
+    Auf dem Hügel 47<br>
+    53347 Alfter, Germany<br>
     Email: <a href="mailto:sealva@tsenger.de" class="link-dark">sealva@tsenger.de</a></p>
+    <p>I develop and run Sealva as a private individual, without any commercial interest. I am not required to appoint a data protection officer and have not done so.</p>
 
-    <h2 id="overview" class="h4 mt-5 mb-3">Overview of Processing</h2>
-    <p>The following overview summarizes the types of data processed and the purposes of their processing and refers to the data subjects.</p>
-
-    <h3 class="h5 mt-4 mb-3">Types of Data Processed</h3>
+    <h2 id="summary" class="h4 mt-5 mb-3">2. Summary</h2>
     <ul>
-      <li>VDS barcode data (scanned via camera, processed and stored locally on device only)</li>
-      <li>Scan history (stored locally on device, user-deletable at any time)</li>
-      <li>Contact data (only when contacting support)</li>
-      <li>Content data (only when contacting support)</li>
-      <li>Meta, communication and process data (IP addresses temporarily logged when downloading verification certificates from server)</li>
-      <li>Log data (server logs during certificate and reference data downloads)</li>
+      <li>Scanned seals are evaluated <strong>on your device</strong>. Names or other personal details contained in a seal never leave your device.</li>
+      <li>The app downloads verification certificates and reference data from my server. To do so, the server has to process your IP address. It is not stored permanently, except in shortened form as described in section 4.3.</li>
+      <li>The app does <strong>not create any device or installation identifier</strong>. Usage statistics are anonymous.</li>
+      <li>There is no advertising, no profiling and no disclosure of your data to third parties for marketing purposes.</li>
     </ul>
 
-    <h3 class="h5 mt-4 mb-3">Categories of Data Subjects</h3>
+    <h2 id="on-device" class="h4 mt-5 mb-3">3. Using the App on Your Device</h2>
+
+    <h3 class="h5 mt-4 mb-3">Camera</h3>
+    <p>Sealva uses the camera only to scan barcodes. Camera images are neither stored nor transmitted.</p>
+
+    <h3 class="h5 mt-4 mb-3">Barcode recognition on Android (Google ML Kit)</h3>
+    <p>On Android, the app recognizes barcodes with Google ML Kit, provided through Google Play services. Recognition takes place on your device; according to Google, camera images are not sent to Google. However, ML Kit may send technical usage and performance data to Google (for example device and app information or how long recognition took) and may download recognition models and updates from Google servers. The provider is Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. A transfer to the USA cannot be ruled out; Google is certified under the EU-U.S. Data Privacy Framework. The legal basis is my legitimate interest in reliable barcode recognition (Art. 6(1)(f) GDPR). More information: <a href="https://developers.google.com/ml-kit/terms" class="link-dark" target="_blank">ML Kit terms</a> and <a href="https://policies.google.com/privacy" class="link-dark" target="_blank">Google Privacy Policy</a>.</p>
+    <p>On iOS, the app uses Apple's barcode recognition, which works entirely on the device.</p>
+
+    <h3 class="h5 mt-4 mb-3">Scan history</h3>
+    <p>Scanned seals are stored only locally on your device. You can switch off saving in the settings and delete single entries or the entire history at any time. I have no access to this data.</p>
+
+    <h3 class="h5 mt-4 mb-3">Local storage</h3>
+    <p>On your device, the app stores only what it needs to work: settings, the scan history, and downloaded certificates and reference data (Section 25(2) No. 2 TDDDG).</p>
+
+    <h2 id="server" class="h4 mt-5 mb-3">4. Connections to My Server</h2>
+    <p>For some functions, the app connects to my server <code>backend.tsenger.de</code>. It runs on a virtual server of Contabo GmbH, Aschauer Straße 32a, 81549 Munich, Germany, in a data center in Germany. A data processing agreement under Art. 28 GDPR is in place with Contabo. All connections are encrypted (HTTPS).</p>
+
+    <h3 class="h5 mt-4 mb-3">4.1 When the app contacts the server</h3>
     <ul>
-      <li>App users</li>
-      <li>Communication partners (support inquiries)</li>
+      <li><strong>Verification certificates:</strong> on first start, then automatically at intervals and whenever you request an update. Without them, the app cannot verify signatures.</li>
+      <li><strong>Municipality directory and postal codes:</strong> to display location information from seals in a readable way.</li>
+      <li><strong>Version check:</strong> on every start, the app asks whether a minimum version is set and, if necessary, suggests an update.</li>
+      <li><strong>Official documents:</strong> if the app does not yet know the document profile or signing certificate of an official seal, it requests it from my server. Only the profile number or the certificate fingerprint (SHA-1) and the source of the issuing authority stated in the seal are sent, never personal details from the document. If my server does not know the entry either, it loads it from the issuing authority itself. The authority only sees my server, not your device.</li>
     </ul>
 
-    <h3 class="h5 mt-4 mb-3">Purposes of Processing</h3>
+    <h3 class="h5 mt-4 mb-3">4.2 Data transmitted</h3>
+    <p>With every connection, your device technically transmits:</p>
     <ul>
-      <li>VDS barcode scanning and verification (local processing only)</li>
-      <li>Certificate download for signature verification</li>
-      <li>Reference data download (municipal directories, postal codes) for improved data presentation</li>
-      <li>Communication and support</li>
-      <li>Organizational and administrative procedures</li>
-      <li>Feedback</li>
-      <li>Server security and operational stability</li>
+      <li>your IP address,</li>
+      <li>date and time,</li>
+      <li>the requested address,</li>
+      <li>the app identifier (user agent), e.g. <code>Sealva/2.9.0 (Android; shared 1.7.0)</code>: app version, platform and version of the shared app core.</li>
     </ul>
 
-    <h2 id="legal-basis" class="h4 mt-5 mb-3">Relevant Legal Basis</h2>
-    <p><strong>Relevant legal basis according to GDPR:</strong> Below you will find an overview of the legal basis of the GDPR on which we process personal data. Please note that in addition to the provisions of the GDPR, national data protection regulations may apply in your or our country of residence or domicile. Should more specific legal bases be relevant in individual cases, we will inform you of these in the privacy policy.</p>
-
+    <h3 class="h5 mt-4 mb-3">4.3 How I use this data</h3>
     <ul>
-      <li><strong>Contract performance and pre-contractual inquiries (Art. 6 para. 1 sentence 1 lit. b) GDPR)</strong> - Processing is necessary for the performance of a contract to which the data subject is party or in order to take steps at the request of the data subject prior to entering into a contract.</li>
-      <li><strong>Legitimate interests (Art. 6 para. 1 sentence 1 lit. f) GDPR)</strong> - Processing is necessary for the purposes of the legitimate interests pursued by the controller or by a third party, except where such interests are overridden by the interests or fundamental rights and freedoms of the data subject which require protection of personal data.</li>
+      <li><strong>Delivering the data:</strong> the IP address is needed to send the response to your device.</li>
+      <li><strong>Protection against abuse:</strong> to prevent anyone from using my server to query third-party servers en masse, loading official documents is limited per IP address. For this, the server keeps the IP address in memory for at most one hour; it is not stored.</li>
+      <li><strong>Log of loaded documents:</strong> when my server loads an entry from an issuing authority because of your request, I log the loaded address, the result, the user agent and your <strong>shortened</strong> IP address (IPv4 without the last block, IPv6 only the first 48 bits). This lets me detect abuse. These entries are deleted automatically after 90 days. The stored profile or certificate only keeps the address it was loaded from and the app version that requested it.</li>
+      <li><strong>Anonymous usage statistics:</strong> I count how often each function is used per day and with which app version. These counters contain neither IP addresses nor any identifier of your device, so they cannot be traced back to individual persons. They help me decide how long older app versions need to be supported.</li>
+      <li><strong>Server logs:</strong> the web server in front of the backend logs requests including the IP address for troubleshooting and to defend against attacks. The logs are rotated weekly and deleted automatically: access logs after at most five weeks, error logs after at most eleven weeks.</li>
     </ul>
+    <p><strong>Legal basis:</strong> my legitimate interest in providing the app's functions, operating the server securely and reliably, and developing the app further (Art. 6(1)(f) GDPR).</p>
 
-    <p><strong>National data protection regulations in Germany:</strong> In addition to the data protection regulations of the GDPR, national data protection regulations apply in Germany. This includes in particular the Federal Data Protection Act (Bundesdatenschutzgesetz - BDSG). The BDSG contains special regulations on the right to information, the right to deletion, the right to object, the processing of special categories of personal data, processing for other purposes and transmission as well as automated decision-making in individual cases including profiling. Furthermore, state data protection laws of the individual federal states may apply.</p>
+    <h2 id="links" class="h4 mt-5 mb-3">5. Links and Other Apps</h2>
+    <p>If you tap a link in the app, for example to a website or an address, it opens in your browser or another app. The privacy policy of the respective provider applies there.</p>
 
-    <h2 id="security" class="h4 mt-5 mb-3">Security Measures</h2>
-    <p>We take appropriate technical and organizational measures in accordance with legal requirements, taking into account the state of the art, implementation costs and the nature, scope, circumstances and purposes of processing, as well as the different probabilities of occurrence and the extent of the threat to the rights and freedoms of natural persons, to ensure a level of protection appropriate to the risk.</p>
+    <h2 id="stores" class="h4 mt-5 mb-3">6. App Stores</h2>
+    <p>If you download Sealva from Google Play or the Apple App Store, these providers process data under their own responsibility, such as your account and the download. I have no influence on this; their privacy policies apply.</p>
 
-    <p>The measures include, in particular, ensuring the confidentiality, integrity and availability of data by controlling physical and electronic access to the data, as well as access to, input of, disclosure of, ensuring availability of and separation of the data. Furthermore, we have established procedures to ensure the exercise of data subjects' rights, the deletion of data and responses to data threats. In addition, we take the protection of personal data into account as early as the development or selection of hardware, software and procedures in accordance with the principle of data protection through technology design and through privacy-friendly default settings.</p>
+    <h2 id="contact" class="h4 mt-5 mb-3">7. Contacting Me by Email</h2>
+    <p>If you write to me, I process your email address, your name (if provided) and the content of your message in order to answer your request. The legal basis is my legitimate interest in answering inquiries (Art. 6(1)(f) GDPR). I keep your messages for as long as is necessary to deal with your request.</p>
 
-    <h3 class="h5 mt-4 mb-3">Local Data Processing</h3>
-    <p>Sealva is designed with privacy as a core principle. The app uses your device's camera permission exclusively to scan barcodes containing Visible Digital Seals (VDS). All barcode data is decoded and processed entirely on your device. No scanned barcode information or personal data from the scans is transmitted to external servers or third parties.</p>
-
-    <h3 class="h5 mt-4 mb-3">User Control and Data Deletion</h3>
-    <p>You have full control over your data stored in the app. All scanned information can be accessed through the "Scan History" menu within Sealva. You can delete any individual scan or all stored scan data at any time through the app interface without affecting the app's functionality. The app does not include any tracking, analytics, or advertising mechanisms.</p>
-
-    <h3 class="h5 mt-4 mb-3">Certificate and Reference Data Downloads</h3>
-    <p>To verify the digital signatures contained in VDS barcodes, Sealva retrieves current verification certificates from a self-hosted server. This download happens automatically on first startup and whenever you explicitly request a certificate update via the app settings.</p>
-    <p>Additionally, the app downloads current municipal directories and postal code databases to provide improved display and interpretation of location information contained in the seals. These reference data help present the information in a more user-friendly format.</p>
-    <p>When your device connects to our server for these downloads, standard server logs may temporarily record your device's IP address. This technical information is collected exclusively for maintaining server security and operational stability and is not used for tracking or profiling purposes.</p>
-
-    <h3 class="h5 mt-4 mb-3">TLS/SSL Encryption (HTTPS)</h3>
-    <p>To protect user data transmitted via our online services from unauthorized access, we use TLS/SSL encryption technology. Secure Sockets Layer (SSL) and Transport Layer Security (TLS) are the cornerstones of secure data transmission on the Internet. These technologies encrypt the information transmitted between the website or app and the user's browser (or between two servers), protecting the data from unauthorized access. TLS, as the more advanced and secure version of SSL, ensures that all data transmissions meet the highest security standards. When a website is secured by an SSL/TLS certificate, this is indicated by the display of HTTPS in the URL. This serves as an indicator to users that their data is being transmitted securely and encrypted.</p>
-
-    <h2 id="contact-management" class="h4 mt-5 mb-3">Contact and Inquiry Management</h2>
-    <p>When contacting us (e.g. by mail, contact form, email, telephone or via social media) and in the context of existing user and business relationships, the information provided by the inquiring persons is processed to the extent necessary to respond to contact inquiries and any requested measures.</p>
-
-    <h3 class="h5 mt-4 mb-3">Processed Data Types</h3>
+    <h2 id="rights" class="h4 mt-5 mb-3">8. Your Rights</h2>
+    <p>You have the right to</p>
     <ul>
-      <li>Contact data (e.g. postal and email addresses or telephone numbers)</li>
-      <li>Content data (e.g. text or image messages and posts and information relating to them, such as author information or time of creation)</li>
-      <li>Meta, communication and process data (e.g. IP addresses, time information, identification numbers, persons involved)</li>
+      <li>access the data I hold about you (Art. 15 GDPR),</li>
+      <li>rectification (Art. 16 GDPR),</li>
+      <li>erasure (Art. 17 GDPR),</li>
+      <li>restriction of processing (Art. 18 GDPR),</li>
+      <li>data portability (Art. 20 GDPR).</li>
     </ul>
+    <p><strong>Right to object (Art. 21 GDPR):</strong> where I process data on the basis of my legitimate interest, you may object at any time on grounds relating to your particular situation. An informal email to <a href="mailto:sealva@tsenger.de" class="link-dark">sealva@tsenger.de</a> is sufficient.</p>
+    <p>Please note: since I do not recognize your device, I usually cannot attribute the data described in section 4 to a person (Art. 11 GDPR). The anonymous statistics contain no personal data at all.</p>
+    <p><strong>Right to lodge a complaint:</strong> you may lodge a complaint with a data protection supervisory authority, for example the authority responsible for me: Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen, Kavalleriestraße 2-4, 40213 Düsseldorf, Germany, <a href="https://www.ldi.nrw.de" class="link-dark" target="_blank">www.ldi.nrw.de</a>.</p>
 
-    <h3 class="h5 mt-4 mb-3">Data Subjects</h3>
-    <p>Communication partners</p>
-
-    <h3 class="h5 mt-4 mb-3">Purposes of Processing</h3>
-    <ul>
-      <li>Communication</li>
-      <li>Organizational and administrative procedures</li>
-      <li>Feedback (e.g. collecting feedback via online form)</li>
-      <li>Provision of our online services and user-friendliness</li>
-    </ul>
-
-    <h3 class="h5 mt-4 mb-3">Storage and Deletion</h3>
-    <p>Deletion according to the information in the section "General information on data storage and deletion".</p>
-
-    <h3 class="h5 mt-4 mb-3">Legal Basis</h3>
-    <ul>
-      <li>Legitimate interests (Art. 6 para. 1 sentence 1 lit. f) GDPR)</li>
-      <li>Contract performance and pre-contractual inquiries (Art. 6 para. 1 sentence 1 lit. b) GDPR)</li>
-    </ul>
-
-    <h3 class="h5 mt-4 mb-3">Contact Form</h3>
-    <p>When contacting us via our contact form, by email or other means of communication, we process the personal data transmitted to us to answer and process the respective request. This usually includes information such as name, contact information and, if applicable, other information that is communicated to us and is necessary for appropriate processing. We use this data exclusively for the stated purpose of contacting and communicating.</p>
-    <p><strong>Legal basis:</strong> Contract performance and pre-contractual inquiries (Art. 6 para. 1 sentence 1 lit. b) GDPR), Legitimate interests (Art. 6 para. 1 sentence 1 lit. f) GDPR).</p>
+    <h2 id="other" class="h4 mt-5 mb-3">9. Other Information</h2>
+    <p><strong>Provision of data:</strong> you are not obliged to provide any data. Without a server connection, however, the app cannot load current certificates or verify unknown official documents.</p>
+    <p><strong>Automated decisions:</strong> there is no automated decision-making or profiling within the meaning of Art. 22 GDPR.</p>
+    <p><strong>Changes:</strong> I update this privacy policy when the app or the legal situation changes. The version published here applies.</p>
 
     <p class="mt-5 text-muted small">© tsenger 2019-2026</p>
   </div>

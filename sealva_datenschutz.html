@@ -116,7 +116,7 @@
     <h1>Datenschutzerklärung - Sealva</h1>
     <p class="lead pb-4 border-bottom mb-5">Sealva prüft elektronische Siegel (Visible Digital Seals, VDS) direkt auf Ihrem Gerät. Die App kommt ohne Konto, Werbung und Tracking aus. Hier erkläre ich, welche Daten dabei trotzdem anfallen, wofür ich sie nutze und welche Rechte Sie haben.</p>
 
-    <p class="text-muted small">Stand: 13. Oktober 2026</p>
+    <p class="text-muted small">Stand: 19. Oktober 2026</p>
 
     <h2 class="h4 mt-4 mb-3">Inhalt</h2>
     <ol>
@@ -136,7 +136,7 @@
     Auf dem Hügel 47<br>
     53347 Alfter<br>
     E-Mail: <a href="mailto:sealva@tsenger.de" class="link-dark">sealva@tsenger.de</a></p>
-    <p>Ich entwickle und betreibe Sealva als Privatperson und ohne kommerzielles Interesse. Einen Datenschutzbeauftragten muss ich nicht benennen und habe das auch nicht getan.</p>
+    <p>Ich entwickle und betreibe Sealva als Privatperson und ohne kommerzielles Interesse.</p>
 
     <h2 id="kurz" class="h4 mt-5 mb-3">2. Das Wichtigste in Kürze</h2>
     <ul>
@@ -162,14 +162,15 @@
     <p>Auf Ihrem Gerät speichert die App nur, was sie für ihre Funktion braucht: Einstellungen, den Scan-Verlauf sowie heruntergeladene Zertifikate und Referenzdaten (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
 
     <h2 id="server" class="h4 mt-5 mb-3">4. Verbindungen zu meinem Server</h2>
-    <p>Für einige Funktionen verbindet sich die App mit meinem Server <code>backend.tsenger.de</code>. Er läuft auf einem virtuellen Server der Contabo GmbH, Aschauer Straße 32a, 81549 München, in einem Rechenzentrum in Deutschland. Mit Contabo besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Alle Verbindungen sind verschlüsselt (HTTPS).</p>
+    <p>Für einige Funktionen verbindet sich die App mit meinem Server <code>backend.seals.tsenger.de</code>. Er läuft auf einem virtuellen Server der Contabo GmbH, Aschauer Straße 32a, 81549 München, in einem Rechenzentrum in Deutschland. Mit Contabo besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Alle Verbindungen sind verschlüsselt (HTTPS).</p>
 
     <h3 class="h5 mt-4 mb-3">4.1 Wann die App den Server kontaktiert</h3>
     <ul>
       <li><strong>Prüfzertifikate:</strong> beim ersten Start, danach automatisch in Abständen und wenn Sie eine Aktualisierung anstoßen. Ohne sie kann die App Signaturen nicht prüfen.</li>
+      <li><strong>Profile und Zertifikate für amtliche Dokumente:</strong> beim ersten Start und danach regelmäßig als Gesamtpaket.</li>
       <li><strong>Gemeindeverzeichnis und Postleitzahlen:</strong> damit Ortsangaben aus den Siegeln verständlich angezeigt werden.</li>
       <li><strong>Versionsprüfung:</strong> bei jedem Start fragt die App, ob eine Mindestversion festgelegt ist, und weist Sie gegebenenfalls auf ein Update hin.</li>
-      <li><strong>Amtliche Dokumente:</strong> Kennt die App das Dokumentprofil oder das Signaturzertifikat eines amtlichen Siegels noch nicht, fragt sie es bei meinem Server an. Übertragen werden nur die Profilnummer bzw. der Fingerabdruck (SHA-1) des Zertifikats und die im Siegel angegebene Bezugsquelle der ausstellenden Stelle, keine persönlichen Angaben aus dem Dokument. Kennt auch mein Server den Eintrag nicht, lädt er ihn selbst bei der ausstellenden Stelle. Diese sieht dabei nur meinen Server, nicht Ihr Gerät.</li>
+      <li><strong>Amtliche Dokumente:</strong> Kennt die App das Dokumentprofil oder das Signaturzertifikat eines amtlichen Siegels noch nicht, fragt sie es bei meinem Server an. Übertragen werden nur die Profilnummer bzw. der Fingerabdruck (SHA-1) des Zertifikats, die im Siegel angegebene Bezugsquelle der ausstellenden Stelle und bei Profilanfragen die TR-Version, keine persönlichen Angaben aus dem Dokument. Verwendet ein Siegel nach Version 0.9 ein Profil ohne Quelle, fragt die App zusätzlich einmal im Hintergrund das Profil der Quelle ab, auch wenn sie das Siegel schon anzeigen kann. Kennt auch mein Server den Eintrag nicht, lädt er ihn selbst bei der ausstellenden Stelle. Diese sieht dabei nur meinen Server, nicht Ihr Gerät. Einen so geladenen Eintrag speichert mein Server dauerhaft und stellt ihn allen Installationen von Sealva bereit, damit dieselbe Stelle nicht für jedes Gerät erneut angefragt werden muss. Gespeichert wird nur das öffentliche Profil bzw. Zertifikat mit den in Abschnitt 4.3 genannten Angaben, kein Bezug zu Ihnen oder Ihrem Gerät. Andere Nutzer erfahren nicht, wer den Eintrag ausgelöst hat.</li>
     </ul>
 
     <h3 class="h5 mt-4 mb-3">4.2 Welche Daten dabei anfallen</h3>

@@ -116,7 +116,7 @@
     <h1>Privacy Policy - Sealva</h1>
     <p class="lead pb-4 border-bottom mb-5">Sealva verifies Visible Digital Seals (VDS) directly on your device. The app works without an account, advertising or tracking. This policy explains which data is nevertheless processed, why, and what rights you have.</p>
 
-    <p class="text-muted small">Last updated: October 13, 2026</p>
+    <p class="text-muted small">Last updated: October 19, 2026</p>
 
     <h2 class="h4 mt-4 mb-3">Table of Contents</h2>
     <ol>
@@ -136,7 +136,7 @@
     Auf dem Hügel 47<br>
     53347 Alfter, Germany<br>
     Email: <a href="mailto:sealva@tsenger.de" class="link-dark">sealva@tsenger.de</a></p>
-    <p>I develop and run Sealva as a private individual, without any commercial interest. I am not required to appoint a data protection officer and have not done so.</p>
+    <p>I develop and run Sealva as a private individual, without any commercial interest.</p>
 
     <h2 id="summary" class="h4 mt-5 mb-3">2. Summary</h2>
     <ul>
@@ -162,14 +162,15 @@
     <p>On your device, the app stores only what it needs to work: settings, the scan history, and downloaded certificates and reference data (Section 25(2) No. 2 TDDDG).</p>
 
     <h2 id="server" class="h4 mt-5 mb-3">4. Connections to My Server</h2>
-    <p>For some functions, the app connects to my server <code>backend.tsenger.de</code>. It runs on a virtual server of Contabo GmbH, Aschauer Straße 32a, 81549 Munich, Germany, in a data center in Germany. A data processing agreement under Art. 28 GDPR is in place with Contabo. All connections are encrypted (HTTPS).</p>
+    <p>For some functions, the app connects to my server <code>backend.seals.tsenger.de</code>. It runs on a virtual server of Contabo GmbH, Aschauer Straße 32a, 81549 Munich, Germany, in a data center in Germany. A data processing agreement under Art. 28 GDPR is in place with Contabo. All connections are encrypted (HTTPS).</p>
 
     <h3 class="h5 mt-4 mb-3">4.1 When the app contacts the server</h3>
     <ul>
       <li><strong>Verification certificates:</strong> on first start, then automatically at intervals and whenever you request an update. Without them, the app cannot verify signatures.</li>
+      <li><strong>Profiles and certificates for official documents:</strong> on first start and then regularly as a complete package.</li>
       <li><strong>Municipality directory and postal codes:</strong> to display location information from seals in a readable way.</li>
       <li><strong>Version check:</strong> on every start, the app asks whether a minimum version is set and, if necessary, suggests an update.</li>
-      <li><strong>Official documents:</strong> if the app does not yet know the document profile or signing certificate of an official seal, it requests it from my server. Only the profile number or the certificate fingerprint (SHA-1) and the source of the issuing authority stated in the seal are sent, never personal details from the document. If my server does not know the entry either, it loads it from the issuing authority itself. The authority only sees my server, not your device.</li>
+      <li><strong>Official documents:</strong> if the app does not yet know the document profile or signing certificate of an official seal, it requests it from my server. Only the profile number or the certificate fingerprint (SHA-1), the source of the issuing authority stated in the seal and, for profile requests, the TR version are sent, never personal details from the document. If a seal of version 0.9 uses a profile without a source, the app additionally requests the profile of the source once in the background, even if it can already display the seal. If my server does not know the entry either, it loads it from the issuing authority itself. The authority only sees my server, not your device. My server stores an entry loaded this way permanently and makes it available to all installations of Sealva, so the same authority does not have to be queried again for every device. Only the public profile or certificate is stored, together with the details listed in section 4.3, with no link to you or your device. Other users cannot tell who triggered the entry.</li>
     </ul>
 
     <h3 class="h5 mt-4 mb-3">4.2 Data transmitted</h3>

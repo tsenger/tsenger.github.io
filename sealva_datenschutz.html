@@ -114,9 +114,9 @@
   <div class="col-12 col-xl-10 col-xxl-8 mt-3 px-4 px-sm-0" data-aos="fade-left" data-aos-delay="100">
     <p class="small"><a href="sealva_privacy.html" class="link-dark" hreflang="en" lang="en">English version</a></p>
     <h1>Datenschutzerklärung - Sealva</h1>
-    <p class="lead pb-4 border-bottom mb-5">Sealva prüft elektronische Siegel (Visible Digital Seals, VDS) direkt auf Ihrem Gerät. Die App kommt ohne Konto, Werbung und Tracking aus. Hier erkläre ich, welche Daten dabei trotzdem anfallen, wofür ich sie nutze und welche Rechte Sie haben.</p>
+    <p class="lead pb-4 border-bottom mb-5">Sealva prüft sichtbare digitale Siegel (Visible Digital Seals, VDS) direkt auf Ihrem Gerät. Die App kommt ohne Konto, Werbung und Tracking aus. Hier erkläre ich, welche Daten dabei trotzdem anfallen, wofür ich sie nutze und welche Rechte Sie haben.</p>
 
-    <p class="text-muted small">Stand: 19. Oktober 2026</p>
+    <p class="text-muted small">Stand: 1. November 2026</p>
 
     <h2 class="h4 mt-4 mb-3">Inhalt</h2>
     <ol>
@@ -151,8 +151,8 @@
     <h3 class="h5 mt-4 mb-3">Kamera</h3>
     <p>Sealva nutzt die Kamera ausschließlich zum Scannen von Barcodes. Die Kamerabilder werden weder gespeichert noch übertragen.</p>
 
-    <h3 class="h5 mt-4 mb-3">Barcode-Erkennung unter Android (Google ML Kit)</h3>
-    <p>Unter Android erkennt die App Barcodes mit Google ML Kit, das über die Google-Play-Dienste bereitgestellt wird. Die Erkennung läuft auf Ihrem Gerät; die Kamerabilder werden laut Google nicht an Google übermittelt. ML Kit kann jedoch technische Nutzungs- und Leistungsdaten an Google senden (etwa Geräte- und App-Informationen oder die Dauer der Erkennung) und lädt bei Bedarf Erkennungsmodelle und Updates von Google-Servern. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Eine Übermittlung in die USA ist nicht ausgeschlossen; Google ist nach dem EU-US Data Privacy Framework zertifiziert. Rechtsgrundlage ist mein berechtigtes Interesse an einer zuverlässigen Barcode-Erkennung (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen: <a href="https://developers.google.com/ml-kit/terms" class="link-dark" target="_blank">Nutzungsbedingungen von ML Kit</a> und <a href="https://policies.google.com/privacy?hl=de" class="link-dark" target="_blank">Datenschutzerklärung von Google</a>.</p>
+    <h3 class="h5 mt-4 mb-3">Barcode-Erkennung unter Android (ZXing)</h3>
+    <p>Unter Android erkennt die App Barcodes mit der Open-Source-Bibliothek ZXing. Die Erkennung läuft vollständig auf Ihrem Gerät; dabei werden keine Daten an Dritte übermittelt.</p>
     <p>Unter iOS nutzt die App die Barcode-Erkennung von Apple, die vollständig auf dem Gerät arbeitet.</p>
 
     <h3 class="h5 mt-4 mb-3">Scan-Verlauf</h3>
@@ -167,10 +167,10 @@
     <h3 class="h5 mt-4 mb-3">4.1 Wann die App den Server kontaktiert</h3>
     <ul>
       <li><strong>Prüfzertifikate:</strong> beim ersten Start, danach automatisch in Abständen und wenn Sie eine Aktualisierung anstoßen. Ohne sie kann die App Signaturen nicht prüfen.</li>
-      <li><strong>Profile und Zertifikate für amtliche Dokumente:</strong> beim ersten Start und danach regelmäßig als Gesamtpaket.</li>
+      <li><strong>Profile und Zertifikate für Verwaltungsdokumente:</strong> beim ersten Start und danach regelmäßig als Gesamtpaket.</li>
       <li><strong>Gemeindeverzeichnis und Postleitzahlen:</strong> damit Ortsangaben aus den Siegeln verständlich angezeigt werden.</li>
       <li><strong>Versionsprüfung:</strong> bei jedem Start fragt die App, ob eine Mindestversion festgelegt ist, und weist Sie gegebenenfalls auf ein Update hin.</li>
-      <li><strong>Amtliche Dokumente:</strong> Kennt die App das Dokumentprofil oder das Signaturzertifikat eines amtlichen Siegels noch nicht, fragt sie es bei meinem Server an. Übertragen werden nur die Profilnummer bzw. der Fingerabdruck (SHA-1) des Zertifikats, die im Siegel angegebene Bezugsquelle der ausstellenden Stelle und bei Profilanfragen die TR-Version, keine persönlichen Angaben aus dem Dokument. Verwendet ein Siegel nach Version 0.9 ein Profil ohne Quelle, fragt die App zusätzlich einmal im Hintergrund das Profil der Quelle ab, auch wenn sie das Siegel schon anzeigen kann. Kennt auch mein Server den Eintrag nicht, lädt er ihn selbst bei der ausstellenden Stelle. Diese sieht dabei nur meinen Server, nicht Ihr Gerät. Einen so geladenen Eintrag speichert mein Server dauerhaft und stellt ihn allen Installationen von Sealva bereit, damit dieselbe Stelle nicht für jedes Gerät erneut angefragt werden muss. Gespeichert wird nur das öffentliche Profil bzw. Zertifikat mit den in Abschnitt 4.3 genannten Angaben, kein Bezug zu Ihnen oder Ihrem Gerät. Andere Nutzer erfahren nicht, wer den Eintrag ausgelöst hat.</li>
+      <li><strong>Verwaltungsdokumente (BSI TR-03171):</strong> Kennt die App das Dokumentprofil oder das Signaturzertifikat eines Verwaltungsdokuments noch nicht, fragt sie es bei meinem Server an. Übertragen werden nur die Profilnummer bzw. der Fingerabdruck (SHA-1) des Zertifikats, die im Siegel angegebene Bezugsquelle und bei Profilanfragen die TR-Version, keine persönlichen Angaben aus dem Dokument. Verwendet ein Siegel nach Version 0.9 ein Profil ohne Quelle, fragt die App zusätzlich einmal im Hintergrund das Profil der Quelle ab, auch wenn sie das Siegel schon anzeigen kann. Kennt auch mein Server den Eintrag nicht, lädt er ihn selbst von der im Siegel angegebenen Adresse. Das ist die ausstellende Stelle oder ein Dienstleister, den sie beauftragt hat. Dessen Server sieht dabei nur meinen Server, nicht Ihr Gerät. Einen so geladenen Eintrag speichert mein Server dauerhaft und stellt ihn allen Installationen von Sealva bereit, damit dieselbe Quelle nicht für jedes Gerät erneut angefragt werden muss. Gespeichert wird nur das öffentliche Profil bzw. Zertifikat mit den in Abschnitt 4.3 genannten Angaben, kein Bezug zu Ihnen oder Ihrem Gerät. Andere Nutzer erfahren nicht, wer den Eintrag ausgelöst hat.</li>
     </ul>
 
     <h3 class="h5 mt-4 mb-3">4.2 Welche Daten dabei anfallen</h3>
@@ -185,12 +185,15 @@
     <h3 class="h5 mt-4 mb-3">4.3 Wie ich diese Daten verwende</h3>
     <ul>
       <li><strong>Auslieferung der Daten:</strong> Die IP-Adresse wird benötigt, um die Antwort an Ihr Gerät zu senden.</li>
-      <li><strong>Schutz vor Missbrauch:</strong> Damit niemand meinen Server nutzen kann, um massenhaft fremde Server abzufragen, ist das Nachladen amtlicher Dokumente pro IP-Adresse begrenzt. Dafür hält der Server die IP-Adresse höchstens eine Stunde im Arbeitsspeicher; gespeichert wird sie dabei nicht.</li>
-      <li><strong>Protokoll des Nachladens:</strong> Lädt mein Server auf Ihre Anfrage einen Eintrag bei einer ausstellenden Stelle, protokolliere ich die geladene Adresse, das Ergebnis, den User-Agent und Ihre <strong>gekürzte</strong> IP-Adresse (bei IPv4 ohne das letzte Zahlenfeld, bei IPv6 nur die ersten 48 Bit). So kann ich Missbrauch erkennen. Diese Einträge werden nach 90 Tagen automatisch gelöscht. Am gespeicherten Profil bzw. Zertifikat bleibt nur vermerkt, von welcher Adresse und mit welcher App-Version es geladen wurde.</li>
-      <li><strong>Anonyme Nutzungsstatistik:</strong> Ich zähle, wie oft pro Tag welche Funktion mit welcher App-Version abgerufen wird. Diese Zähler enthalten weder IP-Adressen noch eine Kennung Ihres Geräts und lassen keine Rückschlüsse auf einzelne Personen zu. Sie helfen mir zu entscheiden, wie lange ältere App-Versionen unterstützt werden müssen.</li>
+      <li><strong>Schutz vor Missbrauch:</strong> Damit niemand meinen Server nutzen kann, um massenhaft fremde Server abzufragen, ist das Nachladen von Profilen und Zertifikaten pro IP-Adresse begrenzt. Dafür hält der Server die IP-Adresse höchstens eine Stunde im Arbeitsspeicher; gespeichert wird sie dabei nicht.</li>
+      <li><strong>Protokoll des Nachladens:</strong> Lädt mein Server auf Ihre Anfrage einen Eintrag von der im Siegel angegebenen Adresse, protokolliere ich die geladene Adresse, das Ergebnis, den User-Agent und Ihre <strong>gekürzte</strong> IP-Adresse (bei IPv4 ohne das letzte Zahlenfeld, bei IPv6 nur die ersten 48 Bit). So kann ich Missbrauch erkennen. Diese Einträge werden nach 90 Tagen automatisch gelöscht. Am gespeicherten Profil bzw. Zertifikat bleiben nur die Adresse, von der es geladen wurde, und die Kennung der App (User-Agent) der auslösenden Anfrage vermerkt, keine IP-Adresse.</li>
+      <li><strong>Anonyme Nutzungsstatistik:</strong> Ich zähle, wie oft pro Tag welche Funktion abgerufen wird, getrennt nach Plattform, App-Version und Version des App-Kerns. Zusätzlich zähle ich die Abrufe pro Stunde, dabei nur getrennt nach Funktion und danach, ob sie von Sealva stammen, ohne Versionsangaben. Diese Zähler enthalten weder IP-Adressen noch eine Kennung Ihres Geräts und lassen keine Rückschlüsse auf einzelne Personen zu. Sie helfen mir zu entscheiden, wie lange ältere App-Versionen unterstützt werden müssen und wann der Server besonders gefragt ist.</li>
       <li><strong>Server-Protokolle:</strong> Der vorgeschaltete Webserver (Reverse Proxy) protokolliert Zugriffe einschließlich der IP-Adresse zur Fehleranalyse und zur Abwehr von Angriffen. Die Protokolle werden wöchentlich rotiert und automatisch gelöscht, Zugriffsprotokolle spätestens nach fünf Wochen, Fehlerprotokolle spätestens nach elf Wochen.</li>
     </ul>
     <p><strong>Rechtsgrundlage</strong> ist mein berechtigtes Interesse, die Funktionen der App bereitzustellen, den Server sicher und stabil zu betreiben und die App weiterzuentwickeln (Art. 6 Abs. 1 lit. f DSGVO).</p>
+
+    <h3 class="h5 mt-4 mb-3">4.4 Daten in geladenen Zertifikaten</h3>
+    <p>Signaturzertifikate von Verwaltungsdokumenten können Namen oder Kontaktdaten von Beschäftigten der ausstellenden Stelle enthalten. Die ausstellende Stelle veröffentlicht diese Zertifikate selbst, damit ihre Siegel geprüft werden können; mein Server lädt sie von der im Siegel angegebenen Adresse (Abschnitt 4.1). Ich speichere sie dauerhaft, damit auch ältere Siegel prüfbar bleiben, und gebe sie ausschließlich zur Prüfung von Siegeln an die Installationen von Sealva weiter. Rechtsgrundlage ist mein berechtigtes Interesse an einer zuverlässigen Prüfung von Siegeln (Art. 6 Abs. 1 lit. f DSGVO). Betroffene können nach Abschnitt 8 widersprechen.</p>
 
     <h2 id="links" class="h4 mt-5 mb-3">5. Links und andere Apps</h2>
     <p>Wenn Sie in der App auf einen Link tippen, zum Beispiel zu einer Webseite oder einer Adresse, öffnet er sich in Ihrem Browser oder in einer anderen App. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters.</p>
@@ -215,7 +218,7 @@
     <p><strong>Beschwerderecht:</strong> Sie können sich bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel bei der für mich zuständigen: Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen, Kavalleriestraße 2-4, 40213 Düsseldorf, <a href="https://www.ldi.nrw.de" class="link-dark" target="_blank">www.ldi.nrw.de</a>.</p>
 
     <h2 id="sonstiges" class="h4 mt-5 mb-3">9. Sonstiges</h2>
-    <p><strong>Bereitstellung von Daten:</strong> Sie sind nicht verpflichtet, Daten bereitzustellen. Ohne Serververbindung kann die App allerdings keine aktuellen Zertifikate laden und unbekannte amtliche Dokumente nicht prüfen.</p>
+    <p><strong>Bereitstellung von Daten:</strong> Sie sind nicht verpflichtet, Daten bereitzustellen. Ohne Serververbindung kann die App allerdings keine aktuellen Zertifikate laden und unbekannte Verwaltungsdokumente nicht prüfen.</p>
     <p><strong>Automatisierte Entscheidungen:</strong> Automatisierte Entscheidungen oder Profiling im Sinne von Art. 22 DSGVO finden nicht statt.</p>
     <p><strong>Änderungen:</strong> Ich passe diese Datenschutzerklärung an, wenn sich die App oder die Rechtslage ändert. Es gilt die jeweils hier veröffentlichte Fassung.</p>
 

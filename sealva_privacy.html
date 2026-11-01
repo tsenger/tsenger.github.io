@@ -116,7 +116,7 @@
     <h1>Privacy Policy - Sealva</h1>
     <p class="lead pb-4 border-bottom mb-5">Sealva verifies Visible Digital Seals (VDS) directly on your device. The app works without an account, advertising or tracking. This policy explains which data is nevertheless processed, why, and what rights you have.</p>
 
-    <p class="text-muted small">Last updated: October 19, 2026</p>
+    <p class="text-muted small">Last updated: November 1, 2026</p>
 
     <h2 class="h4 mt-4 mb-3">Table of Contents</h2>
     <ol>
@@ -151,8 +151,8 @@
     <h3 class="h5 mt-4 mb-3">Camera</h3>
     <p>Sealva uses the camera only to scan barcodes. Camera images are neither stored nor transmitted.</p>
 
-    <h3 class="h5 mt-4 mb-3">Barcode recognition on Android (Google ML Kit)</h3>
-    <p>On Android, the app recognizes barcodes with Google ML Kit, provided through Google Play services. Recognition takes place on your device; according to Google, camera images are not sent to Google. However, ML Kit may send technical usage and performance data to Google (for example device and app information or how long recognition took) and may download recognition models and updates from Google servers. The provider is Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. A transfer to the USA cannot be ruled out; Google is certified under the EU-U.S. Data Privacy Framework. The legal basis is my legitimate interest in reliable barcode recognition (Art. 6(1)(f) GDPR). More information: <a href="https://developers.google.com/ml-kit/terms" class="link-dark" target="_blank">ML Kit terms</a> and <a href="https://policies.google.com/privacy" class="link-dark" target="_blank">Google Privacy Policy</a>.</p>
+    <h3 class="h5 mt-4 mb-3">Barcode recognition on Android (ZXing)</h3>
+    <p>On Android, the app recognizes barcodes with the open-source library ZXing. Recognition takes place entirely on your device; no data is transmitted to third parties.</p>
     <p>On iOS, the app uses Apple's barcode recognition, which works entirely on the device.</p>
 
     <h3 class="h5 mt-4 mb-3">Scan history</h3>
@@ -167,10 +167,10 @@
     <h3 class="h5 mt-4 mb-3">4.1 When the app contacts the server</h3>
     <ul>
       <li><strong>Verification certificates:</strong> on first start, then automatically at intervals and whenever you request an update. Without them, the app cannot verify signatures.</li>
-      <li><strong>Profiles and certificates for official documents:</strong> on first start and then regularly as a complete package.</li>
+      <li><strong>Profiles and certificates for administrative documents:</strong> on first start and then regularly as a complete package.</li>
       <li><strong>Municipality directory and postal codes:</strong> to display location information from seals in a readable way.</li>
       <li><strong>Version check:</strong> on every start, the app asks whether a minimum version is set and, if necessary, suggests an update.</li>
-      <li><strong>Official documents:</strong> if the app does not yet know the document profile or signing certificate of an official seal, it requests it from my server. Only the profile number or the certificate fingerprint (SHA-1), the source of the issuing authority stated in the seal and, for profile requests, the TR version are sent, never personal details from the document. If a seal of version 0.9 uses a profile without a source, the app additionally requests the profile of the source once in the background, even if it can already display the seal. If my server does not know the entry either, it loads it from the issuing authority itself. The authority only sees my server, not your device. My server stores an entry loaded this way permanently and makes it available to all installations of Sealva, so the same authority does not have to be queried again for every device. Only the public profile or certificate is stored, together with the details listed in section 4.3, with no link to you or your device. Other users cannot tell who triggered the entry.</li>
+      <li><strong>Administrative documents (BSI TR-03171):</strong> if the app does not yet know the document profile or signing certificate of an administrative document, it requests it from my server. Only the profile number or the certificate fingerprint (SHA-1), the source stated in the seal and, for profile requests, the TR version are sent, never personal details from the document. If a seal of version 0.9 uses a profile without a source, the app additionally requests the profile of the source once in the background, even if it can already display the seal. If my server does not know the entry either, it loads it itself from the address stated in the seal. This is the issuing authority or a service provider acting on its behalf. Their server only sees my server, not your device. My server stores an entry loaded this way permanently and makes it available to all installations of Sealva, so the same source does not have to be queried again for every device. Only the public profile or certificate is stored, together with the details listed in section 4.3, with no link to you or your device. Other users cannot tell who triggered the entry.</li>
     </ul>
 
     <h3 class="h5 mt-4 mb-3">4.2 Data transmitted</h3>
@@ -185,12 +185,15 @@
     <h3 class="h5 mt-4 mb-3">4.3 How I use this data</h3>
     <ul>
       <li><strong>Delivering the data:</strong> the IP address is needed to send the response to your device.</li>
-      <li><strong>Protection against abuse:</strong> to prevent anyone from using my server to query third-party servers en masse, loading official documents is limited per IP address. For this, the server keeps the IP address in memory for at most one hour; it is not stored.</li>
-      <li><strong>Log of loaded documents:</strong> when my server loads an entry from an issuing authority because of your request, I log the loaded address, the result, the user agent and your <strong>shortened</strong> IP address (IPv4 without the last block, IPv6 only the first 48 bits). This lets me detect abuse. These entries are deleted automatically after 90 days. The stored profile or certificate only keeps the address it was loaded from and the app version that requested it.</li>
-      <li><strong>Anonymous usage statistics:</strong> I count how often each function is used per day and with which app version. These counters contain neither IP addresses nor any identifier of your device, so they cannot be traced back to individual persons. They help me decide how long older app versions need to be supported.</li>
+      <li><strong>Protection against abuse:</strong> to prevent anyone from using my server to query third-party servers en masse, loading profiles and certificates is limited per IP address. For this, the server keeps the IP address in memory for at most one hour; it is not stored.</li>
+      <li><strong>Log of loaded entries:</strong> when my server loads an entry from the address stated in the seal because of your request, I log the loaded address, the result, the user agent and your <strong>shortened</strong> IP address (IPv4 without the last block, IPv6 only the first 48 bits). This lets me detect abuse. These entries are deleted automatically after 90 days. The stored profile or certificate only keeps the address it was loaded from and the app identifier (user agent) of the request that triggered it, no IP address.</li>
+      <li><strong>Anonymous usage statistics:</strong> I count how often each function is used per day, broken down by platform, app version and version of the shared app core. In addition, I count requests per hour, broken down only by function and by whether they come from Sealva, without any version details. These counters contain neither IP addresses nor any identifier of your device, so they cannot be traced back to individual persons. They help me decide how long older app versions need to be supported and when the server is under the most load.</li>
       <li><strong>Server logs:</strong> the web server in front of the backend logs requests including the IP address for troubleshooting and to defend against attacks. The logs are rotated weekly and deleted automatically: access logs after at most five weeks, error logs after at most eleven weeks.</li>
     </ul>
     <p><strong>Legal basis:</strong> my legitimate interest in providing the app's functions, operating the server securely and reliably, and developing the app further (Art. 6(1)(f) GDPR).</p>
+
+    <h3 class="h5 mt-4 mb-3">4.4 Data in loaded certificates</h3>
+    <p>Signing certificates of administrative documents may contain names or contact details of employees of the issuing authority. The issuing authority publishes these certificates itself so that its seals can be verified; my server loads them from the address stated in the seal (section 4.1). I store them permanently so that older seals remain verifiable, and pass them on only to Sealva installations and only for verifying seals. The legal basis is my legitimate interest in reliable seal verification (Art. 6(1)(f) GDPR). Data subjects may object as described in section 8.</p>
 
     <h2 id="links" class="h4 mt-5 mb-3">5. Links and Other Apps</h2>
     <p>If you tap a link in the app, for example to a website or an address, it opens in your browser or another app. The privacy policy of the respective provider applies there.</p>
@@ -215,7 +218,7 @@
     <p><strong>Right to lodge a complaint:</strong> you may lodge a complaint with a data protection supervisory authority, for example the authority responsible for me: Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen, Kavalleriestraße 2-4, 40213 Düsseldorf, Germany, <a href="https://www.ldi.nrw.de" class="link-dark" target="_blank">www.ldi.nrw.de</a>.</p>
 
     <h2 id="other" class="h4 mt-5 mb-3">9. Other Information</h2>
-    <p><strong>Provision of data:</strong> you are not obliged to provide any data. Without a server connection, however, the app cannot load current certificates or verify unknown official documents.</p>
+    <p><strong>Provision of data:</strong> you are not obliged to provide any data. Without a server connection, however, the app cannot load current certificates or verify unknown administrative documents.</p>
     <p><strong>Automated decisions:</strong> there is no automated decision-making or profiling within the meaning of Art. 22 GDPR.</p>
     <p><strong>Changes:</strong> I update this privacy policy when the app or the legal situation changes. The version published here applies.</p>
 

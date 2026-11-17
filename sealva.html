@@ -4,7 +4,7 @@
   <head>
       <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  <meta name="description" content="Sealva - VDS Validator Mobile App">
+  <meta name="description" content="Sealva verifies Visible Digital Seals (VDS) on travel, identity, residence and administrative documents.">
   <link rel="apple-touch-icon" sizes="180x180" href="img/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
@@ -116,47 +116,65 @@
       <img loading="lazy" src="img/webp/sealva_logo.webp" width="120" height="120" class="rounded-circle shadow-sm mb-4" alt="Logo of Sealva App">
     </div>
 
+    <p class="small" data-aos="fade-left" data-aos-delay="100"><a href="sealva_de.html" class="link-dark" hreflang="de" lang="de">Deutsche Fassung</a></p>
     <h1 data-aos="fade-left" data-aos-delay="100">Sealva - VDS Validator</h1>
 
     <div class="lead pb-4 border-bottom mb-5" data-aos="fade-left" data-aos-delay="200">
-      <p>Sealva is a mobile app for scanning, parsing and verifying Visible Digital Seals (VDS).</p>
+      <p>Sealva verifies Visible Digital Seals (VDS) on travel, identity and residence documents as well as on administrative documents. The app reads the seal with the camera, shows the signed data of the document and verifies the issuer's signature cryptographically. Verification runs on the device and also works offline.</p>
     </div>
 
     <div data-aos="fade-left" data-aos-delay="300">
-      <h2 class="h4 mb-3">What is Sealva?</h2>
-      <p>Sealva enables you to scan VDS codes on offical documents and verify their contents. The app supports verification of visual digital seals according to the ICAO 9303 and BSI TR-03137 specifications and provides a user-friendly interface for displaying the data.</p>
-      <p>It uses the open source Kotlin multiplatform library <a class="link-dark link-underline" href="https://github.com/tsenger/vdstools" target="_blank">VdsTools</a> for parsing and decoding the barcode content. </p>
-      <p>Currently, all profiles defined in <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03137" target="_blank">BSI TR-03137-1</a>, 
-        <a class="link-dark link-underline" href="https://www2023.icao.int/publications/Documents/9303_p13_cons_en.pdf" target="_blank">ICAO 9303-13</a>, 
-        and the new draft <a class="link-dark link-underline" href="https://www2023.icao.int/Security/FAL/TRIP/PublishingImages/Pages/Publications/ICAO%20TR%20-%20ICAO%20Datastructure%20for%20Barcode.pdf" target="_blank">“ICAO Datastructure for Barcode”</a> are read and decoded. 
-        Administrative documents according to <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03171">BSI TR-03171</a> are currently not supported due to profile definitions and certificates that are not freely accessible.</p>
-      <h2 class="h4 mb-3 mt-4">Features</h2>
+      <h2 class="h4 mb-3">What is a digital seal?</h2>
+      <p>A digital seal is a Data Matrix or QR code that contains the key data of a document and is signed by its issuer. Verifying the signature and comparing the data with the document reveals forged or altered information.</p>
+      <p>Sealva is made for people who check documents in public authorities and companies, for developers who create or process digital seals, and for anyone who wants to know what data the seal on their own document contains.</p>
+
+      <h2 class="h4 mb-3 mt-4">Supported seals</h2>
+      <p>Sealva reads seals according to
+        <a class="link-dark link-underline" href="https://www2023.icao.int/publications/Documents/9303_p13_cons_en.pdf" target="_blank">ICAO 9303-13</a> (VDS),
+        <a class="link-dark link-underline" href="https://www2023.icao.int/Security/FAL/TRIP/PublishingImages/Pages/Publications/ICAO%20TR%20-%20ICAO%20Datastructure%20for%20Barcode.pdf" target="_blank">ICAO Datastructure for Barcode</a> (IDB),
+        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03137" target="_blank">BSI TR-03137-1</a> and
+        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03171" target="_blank">BSI TR-03171</a>, for example:</p>
       <ul class="ps-4">
-        <li class="mb-2">
-          <strong>Scan visible digital seals</strong>
-          using the mobiles camera
-        </li>
-        <li class="mb-2">
-          <strong>Parse and decode</strong>
-          the data contained in the Seal
-        </li>
-        <li class="mb-2">
-          <strong>Clear presentation</strong>
-          of contained information
-        </li>
-        <li class="mb-2">
-          <strong>Cryptographic verification</strong>
-          of digital signatures
-        </li>
-        <li class="mb-2">
-          <strong>Using Certificate sets</strong>
-          either provided central or using your own certificates
-        </li>
-        <li class="mb-2">
-          <strong>Support for various VDS types</strong>
-          according to ICAO 9303 and BSI TR-03137
-        </li>
+        <li class="mb-2">Address stickers on passports and identity cards</li>
+        <li class="mb-2">Visas</li>
+        <li class="mb-2">Administrative documents, provided the issuer publishes their profiles</li>
       </ul>
+      <p>The seals are parsed and decoded by the open source Kotlin Multiplatform library <a class="link-dark link-underline" href="https://github.com/tsenger/vdstools" target="_blank">VdsTools</a>.</p>
+
+      <h2 class="h4 mb-3 mt-4">How Sealva verifies</h2>
+      <ul class="ps-4">
+        <li class="mb-2">Scan the seal with the camera or open it from a photo or PDF, also via “Share” from other apps.</li>
+        <li class="mb-2">The signature is verified on the device against the stored certificates. The result is clear: valid, valid with notice, invalid or not verifiable. Where needed, a sentence explains the result.</li>
+        <li class="mb-2">Sealva verifies the signature, not the document. Always compare the displayed data with the document.</li>
+        <li class="mb-2">After the first synchronization, verification also works without an internet connection.</li>
+      </ul>
+
+      <h2 class="h4 mb-3 mt-4">Certificates and trust anchors</h2>
+      <ul class="ps-4">
+        <li class="mb-2"><strong>Sovereign documents</strong> are verified against the German Country Signing CA (CSCA) and the document signer certificates published by the BSI.</li>
+        <li class="mb-2"><strong>Administrative documents</strong> are verified against trust anchors: the certification authorities for qualified electronic seals from the German trusted list of the Bundesnetzagentur, which is part of the EU trusted lists. The result names the organization that issued the seal. Sealva does not decide who may issue administrative documents, so check whether this organization is the authority you expect.</li>
+        <li class="mb-2">The certificates for sovereign documents and the trust anchors for administrative documents are included in the app and updated in the background. Signer certificates and profiles of administrative documents are loaded on demand, provided the issuer publishes them.</li>
+        <li class="mb-2">For sovereign documents, you can add your own certificate sets via QR code, for example from a test PKI (see the technical documentation below).</li>
+      </ul>
+
+      <h2 class="h4 mb-3 mt-4">Technical details</h2>
+      <ul class="ps-4">
+        <li class="mb-2">Hex view with a tree of all fields, traceable byte by byte</li>
+        <li class="mb-2">“Structure of the seal” reports missing mandatory fields, unreadable values and wrong lengths</li>
+        <li class="mb-2">Signature details, certificate chains and trust anchors</li>
+        <li class="mb-2">Overview of all readable document types with their fields</li>
+      </ul>
+
+      <h2 class="h4 mb-3 mt-4">History and sharing</h2>
+      <ul class="ps-4">
+        <li class="mb-2">Scanned seals stay on the device in the history and can be verified again or deleted at any time.</li>
+        <li class="mb-2">Share a verification report, export seals and import them into Sealva again.</li>
+      </ul>
+
+      <h2 class="h4 mb-3 mt-4">Privacy</h2>
+      <p>Personal data from the seals never leaves your device. Sealva only downloads certificates, document profiles and place directories. There are no ads, no tracking and no account.</p>
+
+      <p>Sealva is an independent project and not an official app of any public authority. The app is available in German and English.</p>
 
       <h2 class="h4 mb-3 mt-4">Download</h2>
       <p>The app is available for free:</p>

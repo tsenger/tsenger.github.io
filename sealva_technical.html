@@ -127,20 +127,189 @@
 
     <p class="lead pb-4 border-bottom mb-5" data-aos="fade-left"
        data-aos-delay="300">
-      JSON format for importing external Certificate Sets
-      into Sealva Mobile App
+      How Sealva verifies seals, where its certificates and document profiles
+      come from, and the formats it reads and writes.
     </p>
 
     <div data-aos="fade-left" data-aos-delay="400">
-      <h2 class="h4 mb-3">Overview</h2>
+      <h2 class="h4 mb-3">Contents</h2>
+      <ol>
+        <li><a href="#verification" class="link-dark link-underline">Verification</a></li>
+        <li><a href="#results" class="link-dark link-underline">Verification results</a></li>
+        <li><a href="#trust" class="link-dark link-underline">Certificates and trust anchors</a></li>
+        <li><a href="#profiles" class="link-dark link-underline">Profiles of administrative documents</a></li>
+        <li><a href="#certsets" class="link-dark link-underline">Custom certificate sets</a></li>
+        <li><a href="#export" class="link-dark link-underline">Export format (.sealva)</a></li>
+      </ol>
+
+      <h2 id="verification" class="h4 mb-3 mt-5">1. Verification</h2>
       <p>
-        To import external Certificate Sets into the Sealva Mobile App,
-        a QR code containing specific JSON data is required. This QR code
-        provides the app with the necessary information to download and
-        import certificate keystores.
+        Sealva reads seals according to ICAO 9303-13 (VDS), the ICAO Datastructure for Barcode (IDB),
+        BSI TR-03137-1 and BSI TR-03171. Parsing and decoding is done by the open source library
+        <a class="link-dark link-underline" href="https://github.com/tsenger/vdstools" target="_blank">VdsTools</a>.
+        The signature is always verified on the device. Sealva verifies the signature and the
+        certificate path of the signer, not the document itself.
+      </p>
+      <p>
+        An IDB seal whose barcode flag marks it as unsigned is reported as not signed and is not
+        verified. All other seals are verified in one of two ways, depending on the document type.
       </p>
 
-      <h2 class="h4 mb-3 mt-5">QR Code JSON Format</h2>
+      <h3 class="h5 mb-2 mt-4">Sovereign documents (ICAO VDS, ICAO IDB, BSI TR-03137-1)</h3>
+      <ol>
+        <li class="mb-2">
+          The signer certificate is looked up in the <strong>active certificate set</strong>:
+          for a VDS by the signer identifier (country code and common name) and the certificate
+          reference (serial number) from the seal header, for an IDB seal by the signer certificate
+          reference of its signature.
+        </li>
+        <li class="mb-2">
+          The path from the signer certificate to a CA certificate of the same set is built. Sealva
+          links a signer certificate to its CA on import, after verifying the CA's signature over it.
+          The path is trusted if the signer certificate is linked to a CA of the set.
+        </li>
+        <li class="mb-2">
+          The seal signature is verified with the public key of the signer certificate
+          (ECDSA, including Brainpool curves).
+        </li>
+      </ol>
+      <p>
+        Sealva does not evaluate the validity periods of the certificates for these documents.
+      </p>
+
+      <h3 class="h5 mb-2 mt-4">Administrative documents (BSI TR-03171)</h3>
+      <p>
+        Administrative documents are verified independently of the active certificate set.
+      </p>
+      <ol>
+        <li class="mb-2">
+          The signer certificate is identified by the SHA-1 certificate reference in the seal header.
+          Sealva looks it up in its local cache, which mirrors the certificate bundle of the Sealva
+          backend. If it is not there and the seal carries a <code>certificateURI</code> (TR-03171
+          version 0.9 only), Sealva requests it from the backend, which loads it from that address.
+          The app checks that the SHA-1 of the delivered certificate matches the reference.
+        </li>
+        <li class="mb-2">
+          The path from the signer to a <strong>trust anchor</strong> is validated at the current time.
+          The path always has exactly two steps: signer &rarr; anchor. The anchor must have the
+          signer's issuer DN as its subject DN, match the authority key identifier if both carry one,
+          have signed the signer certificate, be a CA (<code>basicConstraints cA</code>), not be blocked
+          and be valid now. The signer's <code>keyUsage</code>, if present, must allow
+          <code>digitalSignature</code> or <code>nonRepudiation</code>, and the signer must be valid now.
+        </li>
+        <li class="mb-2">
+          The seal signature is verified with the public key of the signer certificate.
+        </li>
+        <li class="mb-2">
+          With a valid path, the result names the organization of the signer
+          (<code>O</code> and <code>organizationIdentifier</code> from its subject). Sealva does not
+          decide who may issue administrative documents. Users have to judge whether the organization
+          is the expected issuer.
+        </li>
+        <li class="mb-2">
+          The dates of the seal are checked for plausibility: the signature date must lie within the
+          validity of the signer certificate, and the issuing date must not lie after the signature
+          date. Both dates are signed by the signer itself, so they can only turn a valid result into
+          a notice, never improve a result.
+        </li>
+      </ol>
+
+      <h2 id="results" class="h4 mb-3 mt-5">2. Verification results</h2>
+      <dl class="row">
+        <dt class="col-sm-3 fw-bold">Signature valid</dt>
+        <dd class="col-sm-9">The signature is correct and the signer certificate leads to a trusted CA or trust anchor.</dd>
+
+        <dt class="col-sm-3 fw-bold">Signature valid, with notice</dt>
+        <dd class="col-sm-9">As above, but the structure of the seal deviates from its specification (for example a missing mandatory field or a wrong length), or the dates of an administrative document are implausible.</dd>
+
+        <dt class="col-sm-3 fw-bold">Certificate expired</dt>
+        <dd class="col-sm-9">Administrative documents: the signature is correct, but the signer or its trust anchor is not valid now.</dd>
+
+        <dt class="col-sm-3 fw-bold">Trust anchor unknown</dt>
+        <dd class="col-sm-9">The signature is correct, but no trusted CA or trust anchor issued the signer certificate.</dd>
+
+        <dt class="col-sm-3 fw-bold">Signature invalid</dt>
+        <dd class="col-sm-9">The signature does not match the signed data.</dd>
+
+        <dt class="col-sm-3 fw-bold">Certificate not available</dt>
+        <dd class="col-sm-9">The signer certificate is neither in the active certificate set nor available for the administrative document.</dd>
+
+        <dt class="col-sm-3 fw-bold">Certificate currently unavailable</dt>
+        <dd class="col-sm-9">Administrative documents: the signer certificate could not be loaded right now (no network, rate limit, source not reachable).</dd>
+
+        <dt class="col-sm-3 fw-bold">Certificate blocked</dt>
+        <dd class="col-sm-9">Administrative documents: the signer certificate or its trust anchor has been blocked.</dd>
+
+        <dt class="col-sm-3 fw-bold">Seal is not signed</dt>
+        <dd class="col-sm-9">An IDB seal without signature, which the standard allows.</dd>
+      </dl>
+      <p>
+        The section “Structure of the seal” lists deviations from the specification. Fields that the
+        document type or profile does not define are shown separately and do not affect the result,
+        since ICAO 9303-13 allows unknown tags.
+      </p>
+
+      <h2 id="trust" class="h4 mb-3 mt-5">3. Certificates and trust anchors</h2>
+      <dl class="row">
+        <dt class="col-sm-3 fw-bold">Sovereign documents</dt>
+        <dd class="col-sm-9">
+          The bundled certificate set contains the German Country Signing CA (CSCA) and the document
+          signer certificates published by the BSI. It is updated periodically in the background. A
+          set is only downloaded again if its CA or DS archive has changed.
+        </dd>
+
+        <dt class="col-sm-3 fw-bold">Administrative documents</dt>
+        <dd class="col-sm-9">
+          The trust anchors are the issuing CAs of qualified electronic seals from the German trusted
+          list of the Bundesnetzagentur, which is referenced by the EU list of trusted lists (LOTL).
+          Only services with the status “granted” are taken. The anchors are curated in the Sealva
+          backend and reach the app only through its certificate bundle, never through the request
+          for a single certificate. The bundle also carries the known signer certificates and lists of
+          blocked certificates and blocked anchors. A copy of the bundle is included in the app, so
+          verification works before the first synchronization.
+        </dd>
+      </dl>
+
+      <h2 id="profiles" class="h4 mb-3 mt-5">4. Profiles of administrative documents</h2>
+      <p>
+        BSI TR-03171 seals reference a document profile by its UUID. The profile defines the fields
+        of the document and is needed to decode the content. Sealva handles profiles as follows:
+      </p>
+      <ul class="ps-4">
+        <li class="mb-2">
+          Profiles are identified by UUID, source (the <code>profileURI</code> of the seal, TR-03171
+          version 0.9 only) and TR version. A profile of another source or another TR version is
+          never used.
+        </li>
+        <li class="mb-2">
+          Sealva mirrors the profile bundle of the Sealva backend and updates it periodically in the
+          background. A copy is included in the app.
+        </li>
+        <li class="mb-2">
+          If a profile is missing, Sealva requests it from the backend, which loads it from the
+          address in the seal, provided the issuer publishes it there.
+        </li>
+        <li class="mb-2">
+          Without a profile, the signature can still be verified. On request, Sealva shows the fields
+          with values guessed from their bytes and marks them as guessed.
+        </li>
+      </ul>
+      <p>
+        Requests to the backend only contain the profile UUID or the certificate's SHA-1, the source
+        address from the seal and the TR version, never personal data from the document. See the
+        <a href="sealva_privacy.html" class="link-dark link-underline">privacy policy</a> for details.
+      </p>
+
+      <h2 id="certsets" class="h4 mb-3 mt-5">5. Custom certificate sets</h2>
+      <p>
+        For sovereign documents, custom certificate sets, for example from a test PKI, can be added
+        by scanning a QR code in the certificate settings of the app. The QR code contains a JSON
+        object that tells the app where to download the certificates. A scanned set becomes the active
+        set immediately. If the import fails, the previously active set remains active. Certificate
+        sets have no effect on administrative documents.
+      </p>
+
+      <h3 class="h5 mb-2 mt-4">QR Code JSON Format</h3>
       <p>
         The QR code must contain a JSON object with the following
         structure:
@@ -182,14 +351,14 @@
   "certSetId": "550e8400-e29b-41d4-a716-446655440000"
 }</code></pre>
 
-      <h2 class="h4 mb-3 mt-5">Certificate Collection Response</h2>
+      <h3 class="h5 mb-2 mt-4">Certificate Collection Response</h3>
       <p>
         When the Sealva app calls the <code>certUrl</code>,
         the server must respond with a JSON object containing
         references to the actual certificate keystores.
       </p>
 
-      <h3 class="h5 mb-2 mt-4">Response Structure</h3>
+      <h4 class="h6 mb-2 mt-4">Response Structure</h4>
       <dl class="row">
         <dt class="col-sm-3 fw-bold">
           <code>ca</code>
@@ -221,7 +390,7 @@
         </dd>
       </dl>
 
-      <h3 class="h5 mb-2 mt-4">Keystore Object Structure</h3>
+      <h4 class="h6 mb-2 mt-4">Keystore Object Structure</h4>
       <p>
         Both <code>ca</code> and <code>ds</code> objects have the
         following fields:
@@ -239,7 +408,10 @@
         </dt>
         <dd class="col-sm-9">
           Download URL for the ZIP file containing the certificates
-          (string)
+          (string). The ZIP file contains one DER-encoded certificate per
+          file with the extension <code>.cer</code> or <code>.crt</code>:
+          the CA certificates in the <code>ca</code> archive, the document
+          signer certificates in the <code>ds</code> archive.
         </dd>
 
         <dt class="col-sm-3 fw-bold">
@@ -247,11 +419,12 @@
         </dt>
         <dd class="col-sm-9">
           Timestamp of last update
-          (Unix timestamp in milliseconds)
+          (Unix timestamp in milliseconds). Sealva downloads an archive
+          again only if this value has changed.
         </dd>
       </dl>
 
-      <h3 class="h5 mb-2 mt-4">Example Response</h3>
+      <h4 class="h6 mb-2 mt-4">Example Response</h4>
       <pre class="bg-light p-4 rounded"
            style="overflow-x: auto;"><code>{
   "ca": {
@@ -268,7 +441,7 @@
   "lastPublished": 1704297600000
 }</code></pre>
 
-      <h2 class="h4 mb-3 mt-5">Import Process</h2>
+      <h3 class="h5 mb-2 mt-4">Import Process</h3>
       <ol>
         <li class="mb-2">
           User scans the QR code in Sealva Mobile App
@@ -291,6 +464,78 @@
           Certificates are imported and ready for VDS validation
         </li>
       </ol>
+      <p>
+        The app accepts only <code>"format": "zip"</code> for both archives and
+        <code>"sksInfoVersion": 2</code>. Other values are rejected when the QR code
+        is scanned.
+      </p>
+
+      <h2 id="export" class="h4 mb-3 mt-5">6. Export format (.sealva)</h2>
+      <p>
+        Seals from the history can be exported as a file and imported into Sealva again. The file has
+        the extension <code>.sealva</code> and the MIME type
+        <code>application/vnd.sealva.export+json</code>. Its content is JSON in UTF-8.
+      </p>
+
+      <h3 class="h5 mb-2 mt-4">Example</h3>
+      <pre class="bg-light p-4 rounded"
+           style="overflow-x: auto;"><code>{
+  "format": "sealva-export",
+  "version": 1,
+  "exportedAt": "2026-11-15T09:30:00+01:00",
+  "app": "Sealva 3.0.0",
+  "vdstools": "0.23.0",
+  "seals": [
+    {
+      "scannedAt": "2026-11-15T09:12:00+01:00",
+      "source": "camera",
+      "raw": "dc036abc…",
+      "rawEncoding": "hex",
+      "decoded": {
+        "documentType": "RESIDENCE_PERMIT",
+        "messages": [
+          { "tag": 2, "name": "MRZ", "kind": "MRZ", "value": "…" }
+        ]
+      }
+    }
+  ]
+}</code></pre>
+
+      <h3 class="h5 mb-2 mt-4">Fields of a seal</h3>
+      <dl class="row">
+        <dt class="col-sm-3 fw-bold"><code>scannedAt</code></dt>
+        <dd class="col-sm-9">Time of the scan, ISO 8601 with offset, in whole seconds</dd>
+
+        <dt class="col-sm-3 fw-bold"><code>source</code></dt>
+        <dd class="col-sm-9"><code>camera</code> or <code>file</code> (photo or PDF)</dd>
+
+        <dt class="col-sm-3 fw-bold"><code>raw</code></dt>
+        <dd class="col-sm-9">The content of the barcode, encoded as given in <code>rawEncoding</code></dd>
+
+        <dt class="col-sm-3 fw-bold"><code>rawEncoding</code></dt>
+        <dd class="col-sm-9">
+          <code>hex</code> for VDS seals (and for content that could not be read),
+          <code>text</code> for IDB seals as scanned (<code>RDB1…</code>)
+        </dd>
+
+        <dt class="col-sm-3 fw-bold"><code>decoded</code></dt>
+        <dd class="col-sm-9">
+          The fields as decoded by VdsTools in the version given in <code>vdstools</code>, with the
+          profiles available on the exporting device. Contains <code>documentType</code>,
+          <code>messages</code> (nested like the seal, each with <code>tag</code>, <code>name</code>
+          and either <code>kind</code> and <code>value</code> or sub-<code>messages</code>) and, for
+          administrative documents, <code>profile</code> and <code>metadata</code>. Binary values such
+          as the facial image are Base64 encoded.
+        </dd>
+      </dl>
+      <p>
+        Only <code>scannedAt</code>, <code>source</code>, <code>raw</code> and
+        <code>rawEncoding</code> form the contract. The import reads only these fields and verifies
+        the seal again. <code>decoded</code> is for reading and further processing and may change with
+        new versions of VdsTools. The file contains no verification result, since it depends on the
+        certificates and the time of the verification. <code>version</code> only increases with
+        incompatible changes to the contract, readers should ignore unknown fields.
+      </p>
 
       <p class="mt-5 mb-5">
         <a href="sealva.html" class="link-dark link-underline">

@@ -164,9 +164,27 @@
           reference of its signature.
         </li>
         <li class="mb-2">
+          For a VDS with a machine readable zone (MRZ): if the signer certificate carries the
+          DocumentType extension (ICAO 9303-12, 7.1.1.6), the document type of the MRZ must be listed
+          in it. A single letter allows all types starting with it. IDB seals are exempt, since the
+          German IDB signers list their own types (<code>DA</code>, <code>DB</code>, <code>NA</code>,
+          BSI TR-03137-1) instead of those of the MRZ.
+        </li>
+        <li class="mb-2">
           The path from the signer certificate to a CA certificate of the same set is built. Sealva
           links a signer certificate to its CA on import, after verifying the CA's signature over it.
           The path is trusted if the signer certificate is linked to a CA of the set.
+        </li>
+        <li class="mb-2">
+          No certificate of the path may be revoked. Revoked certificates come with the certificate
+          set (see <a href="#certsets" class="link-dark link-underline">custom certificate sets</a>);
+          Sealva does not fetch CRLs itself.
+        </li>
+        <li class="mb-2">
+          Every certificate of the path must be valid at the time of the verification (shell model,
+          ICAO 9303-12 Appendix D, ICAO 9303-13 Appendix D). A document signer certificate is valid for
+          the period its key is used plus the longest validity of the documents it signs, so an expired
+          signer certificate means the document has expired.
         </li>
         <li class="mb-2">
           The seal signature is verified with the public key of the signer certificate
@@ -174,7 +192,9 @@
         </li>
       </ol>
       <p>
-        Sealva does not evaluate the validity periods of the certificates for these documents.
+        The structure of the seal is checked against its document type. A missing mandatory field, a
+        value that cannot be read or a wrong length counts as a faulty structure (WRONG_FORMAT in
+        ICAO 9303-13 Appendix D).
       </p>
 
       <h3 class="h5 mb-2 mt-4">Administrative documents (BSI TR-03171)</h3>
@@ -212,6 +232,16 @@
           date. Both dates are signed by the signer itself, so they can only turn a valid result into
           a notice, never improve a result.
         </li>
+        <li class="mb-2">
+          If the seal states a validity of the document (<code>VALID_FROM</code> and
+          <code>VALID_TO</code> in version 0.9, <code>VALIDITY_DATES</code> in version 0.8), it is
+          shown with the data. A verification outside this period is reported as a notice
+          (BSI TR-03171, chapter 5).
+        </li>
+        <li class="mb-2">
+          The profile of the document defines its structure. Deviations count as a faulty structure,
+          as for sovereign documents.
+        </li>
       </ol>
 
       <h2 id="results" class="h4 mb-3 mt-5">2. Verification results</h2>
@@ -220,13 +250,22 @@
         <dd class="col-sm-9">The signature is correct and the signer certificate leads to a trusted CA or trust anchor.</dd>
 
         <dt class="col-sm-3 fw-bold">Signature valid, with notice</dt>
-        <dd class="col-sm-9">As above, but the structure of the seal deviates from its specification (for example a missing mandatory field or a wrong length), or the dates of an administrative document are implausible.</dd>
+        <dd class="col-sm-9">Administrative documents: as above, but the dates of the seal are implausible or the document is checked outside its validity.</dd>
 
         <dt class="col-sm-3 fw-bold">Certificate expired</dt>
-        <dd class="col-sm-9">Administrative documents: the signature is correct, but the signer or its trust anchor is not valid now.</dd>
+        <dd class="col-sm-9">The signature is correct, but the signer certificate or the certificate of its CA or trust anchor has expired. The data of the seal are shown as not confirmed.</dd>
+
+        <dt class="col-sm-3 fw-bold">Certificate not yet valid</dt>
+        <dd class="col-sm-9">As above, but a certificate of the path is only valid from a later date. ICAO 9303-13 Appendix D reports both cases as EXPIRED_CERTIFICATE; Sealva names them separately.</dd>
+
+        <dt class="col-sm-3 fw-bold">Faulty structure</dt>
+        <dd class="col-sm-9">The signature is correct, but the seal is not structured as its specification requires. The data are shown as not confirmed.</dd>
 
         <dt class="col-sm-3 fw-bold">Trust anchor unknown</dt>
         <dd class="col-sm-9">The signature is correct, but no trusted CA or trust anchor issued the signer certificate.</dd>
+
+        <dt class="col-sm-3 fw-bold">Document type not allowed</dt>
+        <dd class="col-sm-9">Sovereign documents (VDS only): the DocumentType extension of the signer certificate does not allow the document type of the MRZ.</dd>
 
         <dt class="col-sm-3 fw-bold">Signature invalid</dt>
         <dd class="col-sm-9">The signature does not match the signed data.</dd>
@@ -238,11 +277,17 @@
         <dd class="col-sm-9">Administrative documents: the signer certificate could not be loaded right now (no network, rate limit, source not reachable).</dd>
 
         <dt class="col-sm-3 fw-bold">Certificate blocked</dt>
-        <dd class="col-sm-9">Administrative documents: the signer certificate or its trust anchor has been blocked.</dd>
+        <dd class="col-sm-9">The signer certificate or its CA has been revoked (sovereign documents) or the signer certificate or its trust anchor has been blocked (administrative documents).</dd>
 
         <dt class="col-sm-3 fw-bold">Seal is not signed</dt>
         <dd class="col-sm-9">An IDB seal without signature, which the standard allows.</dd>
       </dl>
+      <p>
+        If a certificate is not valid, the result names it (signer certificate or issuing CA) and the
+        date it expired or becomes valid. The section “Signature” shows the certificate chain from the
+        CA or trust anchor to the signer, with the validity of each certificate. The shared
+        verification report contains the same chain.
+      </p>
       <p>
         The section “Structure of the seal” lists deviations from the specification. Fields that the
         document type or profile does not define are shown separately and do not affect the result,
@@ -255,7 +300,8 @@
         <dd class="col-sm-9">
           The bundled certificate set contains the German Country Signing CA (CSCA) and the document
           signer certificates published by the BSI. It is updated periodically in the background. A
-          set is only downloaded again if its CA or DS archive has changed.
+          set is only downloaded again if its CA or DS archive has changed. The list of revoked
+          certificates of a set is read on every update.
         </dd>
 
         <dt class="col-sm-3 fw-bold">Administrative documents</dt>
@@ -388,7 +434,33 @@
           Timestamp of last publication
           (Unix timestamp in milliseconds)
         </dd>
+
+        <dt class="col-sm-3 fw-bold">
+          <code>revoked</code>
+        </dt>
+        <dd class="col-sm-9">
+          Optional. Revoked signer and CA certificates, each as an object with <code>sha1</code> (SHA-1
+          of the DER encoded certificate, hex) and <code>pem</code> (the certificate). An entry whose
+          PEM contains no certificate with that SHA-1 is skipped.
+        </dd>
+
+        <dt class="col-sm-3 fw-bold">
+          <code>crls</code>
+        </dt>
+        <dd class="col-sm-9">
+          Optional. The CRLs the provider checked the set against, each with <code>issuer</code> (DN),
+          <code>thisUpdate</code> and <code>nextUpdate</code> (Unix timestamps in milliseconds).
+          If the oldest CRL is past its <code>nextUpdate</code>, the app says so in its settings under
+          “Verification data”.
+        </dd>
       </dl>
+      <p>
+        The provider of a set is responsible for revocation. It should check the CRLs of its CAs at
+        least every 24 hours (BSI TR-03137-1, 6.6) and take revoked certificates out of the archives.
+        Listing them in <code>revoked</code> as well lets Sealva report a seal of a revoked signer as
+        blocked instead of as signed by an unknown certificate. A seal whose signer or CA is listed in
+        <code>revoked</code> is reported as blocked, also if the certificate is still in the archives.
+      </p>
 
       <h4 class="h6 mb-2 mt-4">Keystore Object Structure</h4>
       <p>
@@ -438,7 +510,20 @@
     "lastupdate": 1704297600000
   },
   "sksInfoVersion": 2,
-  "lastPublished": 1704297600000
+  "lastPublished": 1704297600000,
+  "revoked": [
+    {
+      "sha1": "3f2a…",
+      "pem": "-----BEGIN CERTIFICATE-----\nMIIC…\n-----END CERTIFICATE-----"
+    }
+  ],
+  "crls": [
+    {
+      "issuer": "C=DE, O=bund, OU=bsi, CN=csca-germany",
+      "thisUpdate": 1704297600000,
+      "nextUpdate": 1712073600000
+    }
+  ]
 }</code></pre>
 
       <h3 class="h5 mb-2 mt-4">Import Process</h3>

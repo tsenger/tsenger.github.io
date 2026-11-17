@@ -300,8 +300,11 @@
         <dd class="col-sm-9">
           The bundled certificate set contains the German Country Signing CA (CSCA) and the document
           signer certificates published by the BSI. It is updated periodically in the background. A
-          set is only downloaded again if its CA or DS archive has changed. The list of revoked
-          certificates of a set is read on every update.
+          set is only downloaded again if its CA or DS archive has changed. The Sealva backend fetches
+          the CRL of every CA in the set every 24 hours and checks its signature against the CA. It
+          takes revoked certificates out of the set and lists them separately, so that the app
+          reports their seals as blocked. The app reads this list on every update and does not
+          contact the CRL addresses itself.
         </dd>
 
         <dt class="col-sm-3 fw-bold">Administrative documents</dt>
@@ -519,7 +522,7 @@
   ],
   "crls": [
     {
-      "issuer": "C=DE, O=bund, OU=bsi, CN=csca-germany",
+      "issuer": "C=DE,O=bund,OU=bsi,CN=csca-germany",
       "thisUpdate": 1704297600000,
       "nextUpdate": 1712073600000
     }

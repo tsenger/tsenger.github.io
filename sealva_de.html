@@ -76,6 +76,14 @@
 
 </style>
 
+   <style>
+   .sealva-shots { display: flex; gap: 1rem; margin: 0 0 3rem; }
+   .sealva-shots figure { flex: 1 1 0; margin: 0; text-align: center; }
+   .sealva-shots img { width: 100%; height: auto; border-radius: 1rem; border: 1px solid rgba(0,0,0,.12); box-shadow: 0 .5rem 1rem rgba(0,0,0,.12); }
+   .sealva-shots figcaption { font-size: .875rem; margin-top: .75rem; }
+   @media only screen and (max-width: 576px) { .sealva-shots { gap: .5rem; } .sealva-shots figcaption { font-size: .75rem; } }
+   </style>
+
   </head>
 
   <body class="position-relative d-flex h-100 w-100" data-bs-spy="scroll" data-bs-target="#navScroll">
@@ -123,52 +131,56 @@
       <p>Sealva prüft visuelle digitale Siegel (VDS) auf Reise-, Ausweis- und Aufenthaltsdokumenten sowie auf Verwaltungsdokumenten. Die App liest das Siegel mit der Kamera, zeigt die signierten Daten des Dokuments an und prüft die Signatur des Ausstellers kryptografisch. Die Prüfung läuft auf dem Gerät und funktioniert auch offline.</p>
     </div>
 
+    <div class="sealva-shots" data-aos="fade-up" data-aos-delay="300">
+      <figure>
+        <img loading="lazy" src="img/webp/sealva_scan_de.webp" width="540" height="960" alt="Sealva-Bildschirm „Siegel prüfen“ mit der Kamera auf einem Siegel-Barcode">
+        <figcaption><strong>1. Scannen</strong><br>Kamera auf das Siegel halten oder ein Foto oder PDF öffnen</figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="img/webp/sealva_result_de.webp" width="540" height="960" alt="Prüfergebnis „Signatur gültig“ mit den signierten Daten eines Visums">
+        <figcaption><strong>2. Ergebnis lesen</strong><br>Sealva prüft die Signatur und zeigt die signierten Daten</figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="img/webp/sealva_history_de.webp" width="540" height="960" alt="Verlauf mit geprüften Siegeln und dem Ergebnis je Eintrag">
+        <figcaption><strong>3. Wiederfinden</strong><br>Geprüfte Siegel bleiben im Verlauf auf dem Gerät</figcaption>
+      </figure>
+    </div>
+
     <div data-aos="fade-left" data-aos-delay="300">
       <h2 class="h4 mb-3">Was ist ein digitales Siegel?</h2>
       <p>Ein digitales Siegel ist ein Data-Matrix- oder QR-Code, der die wichtigsten Angaben eines Dokuments enthält und vom Aussteller signiert ist. Wer die Signatur prüft und die Daten mit dem Dokument abgleicht, erkennt gefälschte oder nachträglich geänderte Angaben.</p>
       <p>Sealva richtet sich an alle, die Dokumente in Behörden und Unternehmen kontrollieren, an Entwickler, die Siegel erzeugen oder auswerten, und an alle, die wissen möchten, welche Daten das Siegel auf ihrem eigenen Dokument enthält.</p>
 
-      <h2 class="h4 mb-3 mt-4">Unterstützte Siegel</h2>
-      <p>Sealva liest Siegel nach
-        <a class="link-dark link-underline" href="https://www2023.icao.int/publications/Documents/9303_p13_cons_en.pdf" target="_blank">ICAO 9303-13</a> (VDS),
-        <a class="link-dark link-underline" href="https://www2023.icao.int/Security/FAL/TRIP/PublishingImages/Pages/Publications/ICAO%20TR%20-%20ICAO%20Datastructure%20for%20Barcode.pdf" target="_blank">ICAO Datastructure for Barcode</a> (IDB),
-        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03137" target="_blank">BSI TR-03137-1</a> und
-        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03171" target="_blank">BSI TR-03171</a>, zum Beispiel:</p>
+      <h2 class="h4 mb-3 mt-4">Welche Dokumente?</h2>
+      <p>Sealva liest zum Beispiel diese Siegel:</p>
       <ul class="ps-4">
         <li class="mb-2">Adressaufkleber auf Reisepass und Personalausweis</li>
-        <li class="mb-2">Visum</li>
-        <li class="mb-2">Verwaltungsdokumente, sofern der Aussteller ihre Profile bereitstellt</li>
+        <li class="mb-2">Visa</li>
+        <li class="mb-2">Verwaltungsdokumente, etwa Bescheinigungen von Behörden, sofern der Aussteller die Beschreibung seines Dokuments bereitstellt</li>
       </ul>
-      <p>Die Siegel liest und dekodiert die Open-Source-Bibliothek <a class="link-dark link-underline" href="https://github.com/tsenger/vdstools" target="_blank">VdsTools</a> (Kotlin Multiplatform).</p>
+      <p>Welche Dokumenttypen Sealva genau kennt, zeigt die App in den Einstellungen unter „Prüfdaten“.</p>
 
-      <h2 class="h4 mb-3 mt-4">So prüft Sealva</h2>
+      <h2 class="h4 mb-3 mt-4">Was das Ergebnis bedeutet</h2>
+      <p>Oben auf der Ergebnisseite steht eines von vier Ergebnissen. Wo nötig, erklärt ein Satz darunter den Grund.</p>
       <ul class="ps-4">
-        <li class="mb-2">Siegel mit der Kamera scannen oder aus einem Foto oder PDF öffnen, auch über „Teilen“ aus anderen Apps.</li>
-        <li class="mb-2">Die Signatur wird auf dem Gerät gegen hinterlegte Zertifikate geprüft. Das Ergebnis ist eindeutig: gültig, gültig mit Hinweis, ungültig oder nicht prüfbar. Wo nötig, erklärt ein Satz das Ergebnis.</li>
-        <li class="mb-2">Sealva prüft die Signatur, nicht das Dokument. Gleichen Sie die angezeigten Daten deshalb immer mit dem Dokument ab.</li>
-        <li class="mb-2">Nach der ersten Synchronisierung funktioniert die Prüfung auch ohne Internet.</li>
+        <li class="mb-2"><strong>Signatur gültig:</strong> Das Siegel ist unverändert und stammt von einer vertrauenswürdigen Stelle.</li>
+        <li class="mb-2"><strong>Gültig mit Hinweis:</strong> Die Signatur ist echt, aber etwas schränkt das Ergebnis ein, zum Beispiel ein abgelaufenes Dokument oder Zertifikat oder ein fehlerhaft aufgebautes Siegel.</li>
+        <li class="mb-2"><strong>Ungültig:</strong> Die Signatur passt nicht zu den Daten oder das Zertifikat des Ausstellers ist gesperrt. Verlassen Sie sich nicht auf die angezeigten Daten.</li>
+        <li class="mb-2"><strong>Nicht prüfbar:</strong> Sealva kann die Signatur nicht prüfen, etwa weil das Zertifikat des Ausstellers fehlt oder das Siegel keine Signatur trägt.</li>
       </ul>
+      <p><strong>Wichtig:</strong> Sealva prüft die Signatur des Siegels, nicht das Dokument selbst. Gleichen Sie die angezeigten Daten deshalb immer mit dem Dokument ab, etwa Name, Geburtsdatum und Dokumentennummer.</p>
 
-      <h2 class="h4 mb-3 mt-4">Zertifikate und Vertrauensanker</h2>
-      <ul class="ps-4">
-        <li class="mb-2"><strong>Hoheitliche Dokumente</strong> prüft Sealva gegen die deutsche Country Signing CA (CSCA) und die Signer-Zertifikate, die das BSI veröffentlicht.</li>
-        <li class="mb-2"><strong>Bei Verwaltungsdokumenten</strong> gelten die Zertifizierungsstellen für qualifizierte elektronische Siegel aus der deutschen Vertrauensliste der Bundesnetzagentur als Vertrauensanker. Die Liste ist Teil der EU-Vertrauensliste. Das Ergebnis nennt die Organisation, die das Siegel ausgestellt hat. Sealva entscheidet nicht, wer Verwaltungsdokumente ausstellen darf. Prüfen Sie deshalb, ob die genannte Organisation die erwartete Behörde ist.</li>
-        <li class="mb-2">Die Zertifikate für hoheitliche Dokumente und die Vertrauensanker für Verwaltungsdokumente sind in der App enthalten und werden im Hintergrund aktualisiert. Signer-Zertifikate und Profile der Verwaltungsdokumente lädt Sealva bei Bedarf nach, sofern der Aussteller sie bereitstellt.</li>
-        <li class="mb-2">Für hoheitliche Dokumente lassen sich per QR-Code auch eigene Zertifikat-Sets einbinden, etwa aus einer Test-PKI (siehe technische Dokumentation unten).</li>
-      </ul>
+      <h2 class="h4 mb-3 mt-4">Siegel aus Fotos und PDFs</h2>
+      <p>Neben der Kamera liest Sealva Siegel auch aus Fotos und PDF-Dateien: über „Foto oder Dokument öffnen“ in der App oder über „Teilen“ aus einer anderen App, etwa aus dem Mail-Programm. Enthält eine Datei mehrere Siegel, wählen Sie das gewünschte aus.</p>
 
-      <h2 class="h4 mb-3 mt-4">Technische Details</h2>
-      <ul class="ps-4">
-        <li class="mb-2">Technische Ansicht mit Hex-Dump und Baum aller Felder, Byte für Byte nachvollziehbar</li>
-        <li class="mb-2">„Aufbau des Siegels“ meldet fehlende Pflichtfelder, unlesbare Werte und falsche Längen</li>
-        <li class="mb-2">Signaturdetails, Zertifikatsketten und Vertrauensanker</li>
-        <li class="mb-2">Übersicht aller lesbaren Dokumenttypen mit ihren Feldern</li>
-      </ul>
+      <h2 class="h4 mb-3 mt-4">Auch ohne Internet</h2>
+      <p>Die Prüfung läuft vollständig auf Ihrem Gerät. Die nötigen Zertifikate sind in der App enthalten und werden im Hintergrund aktualisiert. Nur für manche Verwaltungsdokumente lädt Sealva beim ersten Mal Daten des Ausstellers nach. In den Einstellungen zeigt „Prüfdaten“, ob alles aktuell ist.</p>
 
       <h2 class="h4 mb-3 mt-4">Verlauf und Teilen</h2>
       <ul class="ps-4">
-        <li class="mb-2">Gescannte Siegel bleiben auf dem Gerät im Verlauf und lassen sich jederzeit erneut prüfen oder löschen.</li>
-        <li class="mb-2">Prüfbericht teilen, Siegel exportieren und in Sealva wieder importieren.</li>
+        <li class="mb-2">Geprüfte Siegel bleiben im Verlauf auf Ihrem Gerät, nach Tagen sortiert und mit dem Ergebnis je Eintrag. Ein farbiges Symbol zeigt die Art des Dokuments.</li>
+        <li class="mb-2">Sie entscheiden, was gespeichert wird: Namen im Verlauf ausblenden, Einträge automatisch nach 30, 90 oder 365 Tagen löschen oder das Speichern ganz abschalten.</li>
+        <li class="mb-2">Ein Prüfbericht lässt sich teilen, Siegel lassen sich als Datei exportieren und in Sealva wieder öffnen.</li>
       </ul>
 
       <h2 class="h4 mb-3 mt-4">Datenschutz</h2>
@@ -193,7 +205,33 @@
         </a>
       </div>
 
-      <p class="mt-5">
+      <h2 class="h4 mb-3 mt-5">Angepasste Version</h2>
+      <p>Für Behörden und Unternehmen kann Sealva auf Anfrage angepasst werden, zum Beispiel an eigene Zertifikate, Dokumenttypen oder das eigene Erscheinungsbild. <a class="link-dark link-underline" href="contact.html">Schreiben Sie mir</a>.</p>
+
+      <h2 class="h4 mb-3 mt-5">Technischer Hintergrund</h2>
+      <p>Sealva liest Siegel nach
+        <a class="link-dark link-underline" href="https://www2023.icao.int/publications/Documents/9303_p13_cons_en.pdf" target="_blank">ICAO 9303-13</a> (VDS),
+        <a class="link-dark link-underline" href="https://www2023.icao.int/Security/FAL/TRIP/PublishingImages/Pages/Publications/ICAO%20TR%20-%20ICAO%20Datastructure%20for%20Barcode.pdf" target="_blank">ICAO Datastructure for Barcode</a> (IDB),
+        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03137" target="_blank">BSI TR-03137-1</a> und
+        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03171" target="_blank">BSI TR-03171</a>. Die Siegel liest und dekodiert die Open-Source-Bibliothek <a class="link-dark link-underline" href="https://github.com/tsenger/vdstools" target="_blank">VdsTools</a> (Kotlin Multiplatform).</p>
+
+      <h3 class="h5 mb-3 mt-4">Zertifikate und Vertrauensanker</h3>
+      <ul class="ps-4">
+        <li class="mb-2"><strong>Hoheitliche Dokumente</strong> prüft Sealva gegen die deutsche Country Signing CA (CSCA) und die Signer-Zertifikate, die das BSI veröffentlicht.</li>
+        <li class="mb-2"><strong>Bei Verwaltungsdokumenten</strong> gelten die Zertifizierungsstellen für qualifizierte elektronische Siegel aus der deutschen Vertrauensliste der Bundesnetzagentur als Vertrauensanker. Die Liste ist Teil der EU-Vertrauensliste. Das Ergebnis nennt die Organisation, die das Siegel ausgestellt hat. Sealva entscheidet nicht, wer Verwaltungsdokumente ausstellen darf. Prüfen Sie deshalb, ob die genannte Organisation die erwartete Behörde ist.</li>
+        <li class="mb-2">Die Zertifikate für hoheitliche Dokumente und die Vertrauensanker für Verwaltungsdokumente sind in der App enthalten und werden im Hintergrund aktualisiert. Signer-Zertifikate und Profile der Verwaltungsdokumente lädt Sealva bei Bedarf nach, sofern der Aussteller sie bereitstellt.</li>
+        <li class="mb-2">Für hoheitliche Dokumente lassen sich per QR-Code auch eigene Zertifikat-Sets einbinden, etwa aus einer Test-PKI. Ergebnisse mit einem solchen Set nennen dessen Namen.</li>
+      </ul>
+
+      <h3 class="h5 mb-3 mt-4">Technische Details</h3>
+      <ul class="ps-4">
+        <li class="mb-2">Technische Ansicht mit Hex-Dump und Baum aller Felder, Byte für Byte nachvollziehbar</li>
+        <li class="mb-2">„Aufbau des Siegels“ meldet fehlende Pflichtfelder, unlesbare Werte und falsche Längen</li>
+        <li class="mb-2">Signaturdetails, Zertifikatsketten und Vertrauensanker</li>
+        <li class="mb-2">Übersicht aller lesbaren Dokumenttypen mit ihren Feldern</li>
+      </ul>
+
+      <p class="mt-4">
         <a href="sealva_technical.html" class="link-dark link-underline" hreflang="en">
           Technische Dokumentation
           (für Entwickler, englisch)

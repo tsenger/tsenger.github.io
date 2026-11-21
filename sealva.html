@@ -76,6 +76,14 @@
 
 </style>
 
+   <style>
+   .sealva-shots { display: flex; gap: 1rem; margin: 0 0 3rem; }
+   .sealva-shots figure { flex: 1 1 0; margin: 0; text-align: center; }
+   .sealva-shots img { width: 100%; height: auto; border-radius: 1rem; border: 1px solid rgba(0,0,0,.12); box-shadow: 0 .5rem 1rem rgba(0,0,0,.12); }
+   .sealva-shots figcaption { font-size: .875rem; margin-top: .75rem; }
+   @media only screen and (max-width: 576px) { .sealva-shots { gap: .5rem; } .sealva-shots figcaption { font-size: .75rem; } }
+   </style>
+
   </head>
 
   <body class="position-relative d-flex h-100 w-100" data-bs-spy="scroll" data-bs-target="#navScroll">
@@ -123,52 +131,56 @@
       <p>Sealva verifies Visible Digital Seals (VDS) on travel, identity and residence documents as well as on administrative documents. The app reads the seal with the camera, shows the signed data of the document and verifies the issuer's signature cryptographically. Verification runs on the device and also works offline.</p>
     </div>
 
+    <div class="sealva-shots" data-aos="fade-up" data-aos-delay="300">
+      <figure>
+        <img loading="lazy" src="img/webp/sealva_scan_en.webp" width="540" height="960" alt="Sealva screen “Verify seal” with the camera on a seal barcode">
+        <figcaption><strong>1. Scan</strong><br>Point the camera at the seal or open a photo or PDF</figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="img/webp/sealva_result_en.webp" width="540" height="960" alt="Result “Signature valid” with the signed data of a visa">
+        <figcaption><strong>2. Read the result</strong><br>Sealva verifies the signature and shows the signed data</figcaption>
+      </figure>
+      <figure>
+        <img loading="lazy" src="img/webp/sealva_history_en.webp" width="540" height="960" alt="History of verified seals with the result of each entry">
+        <figcaption><strong>3. Find it again</strong><br>Verified seals stay in the history on your device</figcaption>
+      </figure>
+    </div>
+
     <div data-aos="fade-left" data-aos-delay="300">
       <h2 class="h4 mb-3">What is a digital seal?</h2>
       <p>A digital seal is a Data Matrix or QR code that contains the key data of a document and is signed by its issuer. Verifying the signature and comparing the data with the document reveals forged or altered information.</p>
       <p>Sealva is made for people who check documents in public authorities and companies, for developers who create or process digital seals, and for anyone who wants to know what data the seal on their own document contains.</p>
 
-      <h2 class="h4 mb-3 mt-4">Supported seals</h2>
-      <p>Sealva reads seals according to
-        <a class="link-dark link-underline" href="https://www2023.icao.int/publications/Documents/9303_p13_cons_en.pdf" target="_blank">ICAO 9303-13</a> (VDS),
-        <a class="link-dark link-underline" href="https://www2023.icao.int/Security/FAL/TRIP/PublishingImages/Pages/Publications/ICAO%20TR%20-%20ICAO%20Datastructure%20for%20Barcode.pdf" target="_blank">ICAO Datastructure for Barcode</a> (IDB),
-        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03137" target="_blank">BSI TR-03137-1</a> and
-        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03171" target="_blank">BSI TR-03171</a>, for example:</p>
+      <h2 class="h4 mb-3 mt-4">Which documents?</h2>
+      <p>Sealva reads seals such as these:</p>
       <ul class="ps-4">
         <li class="mb-2">Address stickers on passports and identity cards</li>
         <li class="mb-2">Visas</li>
-        <li class="mb-2">Administrative documents, provided the issuer publishes their profiles</li>
+        <li class="mb-2">Administrative documents, such as certificates from public authorities, provided the issuer publishes the description of its document</li>
       </ul>
-      <p>The seals are parsed and decoded by the open source Kotlin Multiplatform library <a class="link-dark link-underline" href="https://github.com/tsenger/vdstools" target="_blank">VdsTools</a>.</p>
+      <p>The settings list every document type Sealva knows under “Verification data”.</p>
 
-      <h2 class="h4 mb-3 mt-4">How Sealva verifies</h2>
+      <h2 class="h4 mb-3 mt-4">What the result means</h2>
+      <p>The result page shows one of four results at the top. Where needed, a sentence below explains why.</p>
       <ul class="ps-4">
-        <li class="mb-2">Scan the seal with the camera or open it from a photo or PDF, also via “Share” from other apps.</li>
-        <li class="mb-2">The signature is verified on the device against the stored certificates. The result is clear: valid, valid with notice, invalid or not verifiable. Where needed, a sentence explains the result.</li>
-        <li class="mb-2">Sealva verifies the signature, not the document. Always compare the displayed data with the document.</li>
-        <li class="mb-2">After the first synchronization, verification also works without an internet connection.</li>
+        <li class="mb-2"><strong>Signature valid:</strong> The seal is unaltered and comes from a trusted issuer.</li>
+        <li class="mb-2"><strong>Valid with a notice:</strong> The signature is genuine, but something limits the result, for example an expired document or certificate or a seal with a faulty structure.</li>
+        <li class="mb-2"><strong>Invalid:</strong> The signature does not match the data, or the issuer's certificate has been revoked. Do not rely on the displayed data.</li>
+        <li class="mb-2"><strong>Not verifiable:</strong> Sealva cannot verify the signature, for example because the issuer's certificate is missing or the seal carries no signature.</li>
       </ul>
+      <p><strong>Important:</strong> Sealva verifies the signature of the seal, not the document itself. Always compare the displayed data with the document, such as the name, date of birth and document number.</p>
 
-      <h2 class="h4 mb-3 mt-4">Certificates and trust anchors</h2>
-      <ul class="ps-4">
-        <li class="mb-2"><strong>Sovereign documents</strong> are verified against the German Country Signing CA (CSCA) and the document signer certificates published by the BSI.</li>
-        <li class="mb-2"><strong>Administrative documents</strong> are verified against trust anchors: the certification authorities for qualified electronic seals from the German trusted list of the Bundesnetzagentur, which is part of the EU trusted lists. The result names the organization that issued the seal. Sealva does not decide who may issue administrative documents, so check whether this organization is the authority you expect.</li>
-        <li class="mb-2">The certificates for sovereign documents and the trust anchors for administrative documents are included in the app and updated in the background. Signer certificates and profiles of administrative documents are loaded on demand, provided the issuer publishes them.</li>
-        <li class="mb-2">For sovereign documents, you can add your own certificate sets via QR code, for example from a test PKI (see the technical documentation below).</li>
-      </ul>
+      <h2 class="h4 mb-3 mt-4">Seals from photos and PDFs</h2>
+      <p>Besides the camera, Sealva also reads seals from photos and PDF files: via “Open photo or document” in the app or via “Share” from another app, such as your mail app. If a file contains several seals, you pick the one you want.</p>
 
-      <h2 class="h4 mb-3 mt-4">Technical details</h2>
-      <ul class="ps-4">
-        <li class="mb-2">Hex view with a tree of all fields, traceable byte by byte</li>
-        <li class="mb-2">“Structure of the seal” reports missing mandatory fields, unreadable values and wrong lengths</li>
-        <li class="mb-2">Signature details, certificate chains and trust anchors</li>
-        <li class="mb-2">Overview of all readable document types with their fields</li>
-      </ul>
+      <h2 class="h4 mb-3 mt-4">Works offline</h2>
+      <p>Verification runs entirely on your device. The required certificates are included in the app and updated in the background. Only for some administrative documents does Sealva download the issuer's data the first time. In the settings, “Verification data” shows whether everything is up to date.</p>
 
       <h2 class="h4 mb-3 mt-4">History and sharing</h2>
       <ul class="ps-4">
-        <li class="mb-2">Scanned seals stay on the device in the history and can be verified again or deleted at any time.</li>
-        <li class="mb-2">Share a verification report, export seals and import them into Sealva again.</li>
+        <li class="mb-2">Verified seals stay in the history on your device, grouped by day and with the result of each entry. A colored symbol shows the kind of document.</li>
+        <li class="mb-2">You decide what is stored: hide names in the history, delete entries automatically after 30, 90 or 365 days, or turn saving off entirely.</li>
+        <li class="mb-2">Share a verification report, export seals as a file and open them in Sealva again.</li>
       </ul>
 
       <h2 class="h4 mb-3 mt-4">Privacy</h2>
@@ -193,7 +205,33 @@
         </a>
       </div>
 
-      <p class="mt-5">
+      <h2 class="h4 mb-3 mt-5">Customized version</h2>
+      <p>For public authorities and companies, Sealva can be customized on request, for example to their own certificates, document types or branding. <a class="link-dark link-underline" href="contact.html">Get in touch</a>.</p>
+
+      <h2 class="h4 mb-3 mt-5">Technical background</h2>
+      <p>Sealva reads seals according to
+        <a class="link-dark link-underline" href="https://www2023.icao.int/publications/Documents/9303_p13_cons_en.pdf" target="_blank">ICAO 9303-13</a> (VDS),
+        <a class="link-dark link-underline" href="https://www2023.icao.int/Security/FAL/TRIP/PublishingImages/Pages/Publications/ICAO%20TR%20-%20ICAO%20Datastructure%20for%20Barcode.pdf" target="_blank">ICAO Datastructure for Barcode</a> (IDB),
+        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03137" target="_blank">BSI TR-03137-1</a> and
+        <a class="link-dark link-underline" href="https://www.bsi.bund.de/dok/TR-03171" target="_blank">BSI TR-03171</a>. The seals are parsed and decoded by the open source Kotlin Multiplatform library <a class="link-dark link-underline" href="https://github.com/tsenger/vdstools" target="_blank">VdsTools</a>.</p>
+
+      <h3 class="h5 mb-3 mt-4">Certificates and trust anchors</h3>
+      <ul class="ps-4">
+        <li class="mb-2"><strong>Sovereign documents</strong> are verified against the German Country Signing CA (CSCA) and the document signer certificates published by the BSI.</li>
+        <li class="mb-2"><strong>Administrative documents</strong> are verified against trust anchors: the certification authorities for qualified electronic seals from the German trusted list of the Bundesnetzagentur, which is part of the EU trusted lists. The result names the organization that issued the seal. Sealva does not decide who may issue administrative documents, so check whether this organization is the authority you expect.</li>
+        <li class="mb-2">The certificates for sovereign documents and the trust anchors for administrative documents are included in the app and updated in the background. Signer certificates and profiles of administrative documents are loaded on demand, provided the issuer publishes them.</li>
+        <li class="mb-2">For sovereign documents, you can add your own certificate sets via QR code, for example from a test PKI. Results verified with such a set name it.</li>
+      </ul>
+
+      <h3 class="h5 mb-3 mt-4">Technical details</h3>
+      <ul class="ps-4">
+        <li class="mb-2">Hex view with a tree of all fields, traceable byte by byte</li>
+        <li class="mb-2">“Structure of the seal” reports missing mandatory fields, unreadable values and wrong lengths</li>
+        <li class="mb-2">Signature details, certificate chains and trust anchors</li>
+        <li class="mb-2">Overview of all readable document types with their fields</li>
+      </ul>
+
+      <p class="mt-4">
         <a href="sealva_technical.html" class="link-dark link-underline">
           Technical Documentation
           (for developers)
